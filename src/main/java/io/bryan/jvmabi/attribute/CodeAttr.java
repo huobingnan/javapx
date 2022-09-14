@@ -5,7 +5,7 @@ import io.bryan.jvmabi.reader.IByteCodeReader;
 
 import java.io.Serializable;
 
-public final class CodeAttr implements Serializable, IAttribute {
+public final class CodeAttr implements Serializable, IJvmAttribute {
 
     @Override
     public String name() { return "Code"; }

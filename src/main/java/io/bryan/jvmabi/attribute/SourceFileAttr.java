@@ -5,7 +5,7 @@ import io.bryan.jvmabi.reader.IByteCodeReader;
 
 import java.io.Serializable;
 
-public final class SourceFileAttr implements Serializable, IAttribute {
+public final class SourceFileAttr implements Serializable, IJvmAttribute {
 
     private int length;
     private short index;

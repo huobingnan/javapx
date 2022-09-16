@@ -21,4 +21,9 @@ public final class ConstantFloat implements Serializable, IJvmConstant {
     public void read(IByteCodeReader reader) { value = Float.intBitsToFloat(reader.readU4()); }
 
     public float getFloatValue() { return value; }
+
+    @Override
+    public String toString() {
+        return "<CONSTANT_Float_Info, " + value + ">";
+    }
 }

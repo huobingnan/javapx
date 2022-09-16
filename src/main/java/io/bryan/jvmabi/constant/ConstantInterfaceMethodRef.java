@@ -31,4 +31,9 @@ public final class ConstantInterfaceMethodRef implements Serializable, IJvmConst
     public short getClassIndex() { return classIndex; }
 
     public short getNameAndTypeIndex() { return nameAndTypeIndex; }
+
+    @Override
+    public String toString() {
+        return "<CONSTANT_Interfacemethod_Info, #" + classIndex + " #" + nameAndTypeIndex + ">";
+    }
 }

@@ -12,10 +12,11 @@ public final class JvmClassFileConstantPool {
 
     public void append(IJvmConstant constant) { pool[appendCursor++] = constant; }
 
-    public int getConstantPoolCount() { return pool.length; }
+    public int length() { return pool.length; }
 
     public IJvmConstant get(int index) { return pool[index]; }
 
     @SuppressWarnings({ "unchecked" })
     public <T> T getExact(int index) { return (T) pool[index]; }
+
 }

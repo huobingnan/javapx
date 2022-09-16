@@ -31,4 +31,9 @@ public final class ConstantInvokeDynamic implements Serializable, IJvmConstant {
     public short getBootstrapMethodAttributeIndex() { return bootstrapMethodAttributeIndex; }
 
     public short getNameAndTypeIndex() { return nameAndTypeIndex; }
+
+    @Override
+    public String toString() {
+        return "<CONSTANT_InvokeDynamic_Info, @" + bootstrapMethodAttributeIndex + " #" + nameAndTypeIndex + ">";
+    }
 }

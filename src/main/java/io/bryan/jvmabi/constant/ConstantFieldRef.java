@@ -31,4 +31,9 @@ public final class ConstantFieldRef implements Serializable, IJvmConstant {
     public short getClassIndex() { return classIndex; }
 
     public short getNameAndTypeIndex() { return nameAndTypeIndex; }
+
+    @Override
+    public String toString() {
+        return "<CONSTANT_Fieldref_Info, #" + classIndex + " #" + nameAndTypeIndex + ">";
+    }
 }

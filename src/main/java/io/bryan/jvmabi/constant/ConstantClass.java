@@ -21,4 +21,9 @@ public final class ConstantClass implements Serializable, IJvmConstant {
     public void read(IByteCodeReader reader) { nameIndex = reader.readU2(); }
 
     public short getNameIndex() { return nameIndex; }
+
+    @Override
+    public String toString() {
+        return "<CONSTANT_Class_Info, #" + nameIndex + ">";
+    }
 }

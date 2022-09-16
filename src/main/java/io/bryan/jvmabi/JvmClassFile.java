@@ -61,13 +61,39 @@ public final class JvmClassFile {
             classFile.interfaces[i] = byteCodeReader.readU2();
         }
 
+        // parse attribute table
+//        classFile.attributes = new JvmClassFileAttrTable(byteCodeReader.readU2());
+//        parseAttributeTable(classFile.attributes, classFile.constantPool ,byteCodeReader);
         return classFile;
     }
 
     private static void parseConstantPool(JvmClassFileConstantPool pool, IByteCodeReader reader) {
-        for (int i = 1, len = pool.getConstantPoolCount(); i < len; i++) {
+        for (int i = 1, len = pool.length(); i < len; i++) {
             parseConstant(pool, reader);
         }
+    }
+
+    private static void parseAttributeTable(JvmClassFileAttrTable table,
+                                            JvmClassFileConstantPool pool,
+                                            IByteCodeReader reader) {
+        for (int i = 0, len = table.length(); i < len; i++) {
+            parseAttribute(table, pool, reader);
+        }
+    }
+
+    private static void parseAttribute(JvmClassFileAttrTable table,
+                                       JvmClassFileConstantPool pool,
+                                       IByteCodeReader reader) {
+        final short attrNameIndex = reader.readU2();
+        final String name = pool.<ConstantUtf8>getExact(attrNameIndex).toContentString();
+        switch (name) {
+            case "Code": break;
+            default:
+                throw new ReadByteCodeException(
+                        String.format("Unsupported attribute named %s", name)
+                );
+        }
+
     }
 
 

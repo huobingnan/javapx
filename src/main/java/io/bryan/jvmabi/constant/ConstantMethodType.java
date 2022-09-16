@@ -22,4 +22,10 @@ public final class ConstantMethodType implements Serializable, IJvmConstant {
     public void read(IByteCodeReader reader) { descriptorIndex = reader.readU2(); }
 
     public short getDescriptorIndex() { return descriptorIndex; }
+
+    @Override
+    public String toString() {
+        return "<CONSTANT_Methodtype_Info, #" + descriptorIndex + ">";
+
+    }
 }

@@ -22,4 +22,9 @@ public final class ConstantString implements Serializable, IJvmConstant {
     public void read(IByteCodeReader reader) { index = reader.readU2(); }
 
     public short getUtf8Index() { return index; }
+
+    @Override
+    public String toString() {
+        return "<CONSTANT_String_Info, #" + index + ">";
+    }
 }

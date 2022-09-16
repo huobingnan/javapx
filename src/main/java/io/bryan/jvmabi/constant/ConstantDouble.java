@@ -22,4 +22,9 @@ public final class ConstantDouble implements Serializable, IJvmConstant {
     public void read(IByteCodeReader reader) { value = Double.longBitsToDouble(reader.readU4()); }
 
     public double getDoubleValue() { return value; }
+
+    @Override
+    public String toString() {
+       return "<CONSTANT_Double_Info, " + value + ">";
+    }
 }

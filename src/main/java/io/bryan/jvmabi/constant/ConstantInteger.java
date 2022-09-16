@@ -18,4 +18,9 @@ public final class ConstantInteger implements Serializable, IJvmConstant {
     public void read(IByteCodeReader reader) { value = reader.readU4(); }
 
     public int getIntValue() { return value; }
+
+    @Override
+    public String toString() {
+        return "<CONSTANT_Integer_Info, " + value + ">";
+    }
 }

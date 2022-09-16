@@ -20,4 +20,9 @@ public final class ConstantLong implements Serializable, IJvmConstant {
 
     @Override
     public void read(IByteCodeReader reader) { value = reader.readU8(); }
+
+    @Override
+    public String toString() {
+        return "<CONSTANT_Long_Info, " + value + ">";
+    }
 }

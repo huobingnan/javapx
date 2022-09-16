@@ -31,4 +31,9 @@ public final class ConstantNameAndType implements Serializable, IJvmConstant {
     public short getNameIndex() { return nameIndex; }
 
     public short getDescriptorIndex() { return descriptorIndex; }
+
+    @Override
+    public String toString() {
+        return "<CONSTANT_NameAndType_Info, #" + nameIndex + " #" + descriptorIndex + ">";
+    }
 }

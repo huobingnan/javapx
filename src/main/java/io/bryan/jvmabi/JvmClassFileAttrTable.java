@@ -18,5 +18,7 @@ public final class JvmClassFileAttrTable implements Serializable {
     public void append(IJvmAttribute attr) { attributes[appendCursor++] = attr; }
 
     public boolean isFull() { return appendCursor == attributes.length; }
+
+    public int length() { return attributes.length; }
 }
 

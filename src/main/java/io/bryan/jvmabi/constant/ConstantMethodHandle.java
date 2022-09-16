@@ -31,4 +31,9 @@ public final class ConstantMethodHandle implements Serializable, IJvmConstant {
     public short getReferenceKind() { return referenceKind; }
 
     public short getReferenceIndex() { return referenceIndex; }
+
+    @Override
+    public String toString() {
+        return "<CONSTANT_Methodhandle_Info, " + referenceKind + " #" + referenceIndex + ">";
+    }
 }

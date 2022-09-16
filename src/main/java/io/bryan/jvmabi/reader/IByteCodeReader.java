@@ -1,6 +1,6 @@
 package io.bryan.jvmabi.reader;
 
-public interface IByteCodeReader {
+public interface IByteCodeReader extends AutoCloseable {
     byte  readU1();
     short readU2();
     int   readU4();

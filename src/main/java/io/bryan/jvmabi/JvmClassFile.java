@@ -37,34 +37,30 @@ public final class JvmClassFile {
     public short[] getInterfaces() { return interfaces; }
 
     // 解析JVM Class File
-    public static JvmClassFile parse(InputStream is) {
+    public static JvmClassFile parse(InputStream is)  {
         final JvmClassFile classFile = new JvmClassFile();
-        final IByteCodeReader byteCodeReader = new BufferedByteCodeReader(is);
+        try(final IByteCodeReader byteCodeReader = new BufferedByteCodeReader(is)) {
+            // parse header info
+            classFile.magic = byteCodeReader.readU4();
+            classFile.minorVersion = byteCodeReader.readU2();
+            classFile.majorVersion = byteCodeReader.readU2();
+            classFile.constantPool = new JvmClassFileConstantPool(byteCodeReader.readU2());
 
-        // parse header info
-        classFile.magic = byteCodeReader.readU4();
-        classFile.minorVersion = byteCodeReader.readU2();
-        classFile.majorVersion = byteCodeReader.readU2();
-        classFile.constantPool = new JvmClassFileConstantPool(byteCodeReader.readU2());
+            // parse constant pool
+            parseConstantPool(classFile.constantPool, byteCodeReader);
 
-        // parse constant pool
-        parseConstantPool(classFile.constantPool, byteCodeReader);
+            // parse this class descriptors
+            classFile.accessFlags = byteCodeReader.readU2();
+            classFile.thisClass = byteCodeReader.readU2();
+            classFile.superClass = byteCodeReader.readU2();
+            classFile.interfaces = new short[byteCodeReader.readU2()];
 
-        // parse this class descriptors
-        classFile.accessFlags = byteCodeReader.readU2();
-        classFile.thisClass = byteCodeReader.readU2();
-        classFile.superClass = byteCodeReader.readU2();
-        classFile.interfaces = new short[byteCodeReader.readU2()];
-
-        // parse interfaces index
-        for (int i = 0, len = classFile.interfaces.length; i < len; i++) {
-            classFile.interfaces[i] = byteCodeReader.readU2();
-        }
-
-        // parse attribute table
-//        classFile.attributes = new JvmClassFileAttrTable(byteCodeReader.readU2());
-//        parseAttributeTable(classFile.attributes, classFile.constantPool ,byteCodeReader);
-        return classFile;
+            // parse interfaces index
+            for (int i = 0, len = classFile.interfaces.length; i < len; i++) {
+                classFile.interfaces[i] = byteCodeReader.readU2();
+            }
+            return classFile;
+        }catch (Exception ex) { throw new ReadByteCodeException(ex); }
     }
 
     private static void parseConstantPool(JvmClassFileConstantPool pool, IByteCodeReader reader) {
@@ -85,7 +81,7 @@ public final class JvmClassFile {
                                        JvmClassFileConstantPool pool,
                                        IByteCodeReader reader) {
         final short attrNameIndex = reader.readU2();
-        final String name = pool.<ConstantUtf8>getExact(attrNameIndex).toContentString();
+        final String name = pool.<ConstantUtf8>getExact(attrNameIndex).contentToString();
         switch (name) {
             case "Code": break;
             default:

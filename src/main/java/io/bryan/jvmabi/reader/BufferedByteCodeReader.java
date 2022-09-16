@@ -7,7 +7,7 @@ import java.io.Closeable;
 import java.io.IOException;
 import java.io.InputStream;
 
-public class BufferedByteCodeReader implements IByteCodeReader, Closeable {
+public class BufferedByteCodeReader implements IByteCodeReader {
 
     private final BufferedInputStream bis;
     private final byte[] buffer;
@@ -71,7 +71,7 @@ public class BufferedByteCodeReader implements IByteCodeReader, Closeable {
     }
 
     @Override
-    public void close() throws IOException { bis.close(); }
+    public void close() throws Exception { bis.close(); }
 
     public int getOffset() { return offset; }
 }

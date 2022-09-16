@@ -25,7 +25,7 @@ public final class ConstantUtf8 implements Serializable, IJvmConstant {
             bytes[i] = reader.readU1();
     }
 
-    public String toContentString() { return new String(bytes, StandardCharsets.UTF_8); }
+    public String contentToString() { return new String(bytes, StandardCharsets.UTF_8); }
 
     @Override
     public String toString() {

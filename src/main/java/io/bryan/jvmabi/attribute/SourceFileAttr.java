@@ -1,6 +1,7 @@
 package io.bryan.jvmabi.attribute;
 
 import io.bryan.jvmabi.JvmClassFile;
+import io.bryan.jvmabi.JvmClassFileConstantPool;
 import io.bryan.jvmabi.reader.IByteCodeReader;
 
 import java.io.Serializable;
@@ -17,14 +18,19 @@ public final class SourceFileAttr implements Serializable, IJvmAttribute {
         this.index = index;
     }
 
-    public SourceFileAttr(JvmClassFile classFile, IByteCodeReader reader) { read(classFile, reader); }
+    public SourceFileAttr(JvmClassFileConstantPool pool, IByteCodeReader reader) { read(pool, reader); }
 
     @Override
     public String name() { return "SourceFile"; }
 
     @Override
-    public void read(JvmClassFile classFile, IByteCodeReader reader) {
+    public void read(JvmClassFileConstantPool pool, IByteCodeReader reader) {
         length = reader.readU4();
         index  = reader.readU2();
     }
+
+    @Override
+    public int getAttrLength() { return length;}
+
+    public short getIndex() { return index; }
 }

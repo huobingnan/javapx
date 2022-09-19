@@ -1,5 +1,6 @@
 package io.bryan.jvmabi;
 
+import io.bryan.jvmabi.attribute.*;
 import io.bryan.jvmabi.constant.*;
 import io.bryan.jvmabi.reader.BufferedByteCodeReader;
 import io.bryan.jvmabi.reader.IByteCodeReader;
@@ -80,10 +81,34 @@ public final class JvmClassFile {
     private static void parseAttribute(JvmClassFileAttrTable table,
                                        JvmClassFileConstantPool pool,
                                        IByteCodeReader reader) {
-        final short attrNameIndex = reader.readU2();
-        final String name = pool.<ConstantUtf8>getExact(attrNameIndex).contentToString();
+        final short attrNameIndex = reader.readU2(); // attribute name index
+        final String name = pool.<ConstantUtf8>getExact(attrNameIndex).contentToString(); // attribute name
         switch (name) {
             case "Code": break;
+            case "LineNumberTable":
+                table.append(new LineNumberTableAttr(pool, reader));
+                break;
+            case "Exceptions":
+                table.append(new ExceptionsAttr(pool, reader));
+                break;
+            case "LocalVariableTable":
+                table.append(new LocalVariableTableAttr(pool, reader));
+                break;
+            case "SourceFile":
+                table.append(new SourceFileAttr(pool, reader));
+                break;
+            case "ConstantValue":
+                table.append(new ConstantValueAttr(pool, reader));
+                break;
+            case "Deprecated":
+                table.append(new DeprecatedAttr()); // boolean型属性
+                break;
+            case "Synthetic":
+                table.append(new SyntheticAttr()); // boolean型属性
+                break;
+            case "InnerClasses":
+                table.append(new InnerClassesAttr(pool, reader));
+                break;
             default:
                 throw new ReadByteCodeException(
                         String.format("Unsupported attribute named %s", name)

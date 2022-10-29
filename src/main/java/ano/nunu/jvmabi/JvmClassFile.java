@@ -111,6 +111,16 @@ public final class JvmClassFile {
             case "InnerClasses":
                 table.append(new InnerClassesAttr(pool, reader));
                 break;
+            case "BootstrapMethods":
+                table.append(new BoostrapMethodsAttr(pool, reader));
+                break;
+            case "MethodParameters":
+                table.append(new MethodParametersAttr(pool, reader));
+                break;
+            case "StackMapFrame":
+                // the most complex attribute
+                table.append(new StackMapTableAttr(pool, reader));
+                break;
             default:
                 throw new ReadByteCodeException(
                         String.format("Unsupported attribute named %s", name)

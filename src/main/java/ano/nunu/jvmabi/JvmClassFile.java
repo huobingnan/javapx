@@ -68,7 +68,7 @@ public final class JvmClassFile {
 
     private static void parseConstantPool(JvmClassFileConstantPool pool, IByteCodeReader reader) {
         for (int i = 1, len = pool.length(); i < len; i++) {
-            parseConstant(pool, reader);
+            pool.append(parseConstant(reader));
         }
     }
 
@@ -76,51 +76,39 @@ public final class JvmClassFile {
                                             JvmClassFileConstantPool pool,
                                             IByteCodeReader reader) {
         for (int i = 0, len = table.length(); i < len; i++) {
-            parseAttribute(table, pool, reader);
+            table.append(parseAttribute(pool, reader));
         }
     }
 
-    private static void parseAttribute(JvmClassFileAttrTable table,
-                                       JvmClassFileConstantPool pool,
-                                       IByteCodeReader reader) {
+    public static IJvmAttribute parseAttribute(JvmClassFileConstantPool pool, IByteCodeReader reader) {
         final short attrNameIndex = reader.readU2(); // attribute name index
         final String name = pool.<ConstantUtf8>getExact(attrNameIndex).contentToString(); // attribute name
         switch (name) {
-            case "Code": break;
+            case "Code":
+                return new CodeAttr(pool, reader);
             case "LineNumberTable":
-                table.append(new LineNumberTableAttr(pool, reader));
-                break;
+                return new LineNumberTableAttr(pool, reader);
             case "Exceptions":
-                table.append(new ExceptionsAttr(pool, reader));
-                break;
+                return new ExceptionsAttr(pool, reader);
             case "LocalVariableTable":
-                table.append(new LocalVariableTableAttr(pool, reader));
-                break;
+                return new LocalVariableTableAttr(pool, reader);
             case "SourceFile":
-                table.append(new SourceFileAttr(pool, reader));
-                break;
+                return new SourceFileAttr(pool, reader);
             case "ConstantValue":
-                table.append(new ConstantValueAttr(pool, reader));
-                break;
+                return new ConstantValueAttr(pool, reader);
             case "Deprecated":
-                table.append(new DeprecatedAttr()); // boolean型属性
-                break;
+                return new DeprecatedAttr(); // boolean型属性
             case "Synthetic":
-                table.append(new SyntheticAttr()); // boolean型属性
-                break;
+                return new SyntheticAttr(); // boolean型属性
             case "InnerClasses":
-                table.append(new InnerClassesAttr(pool, reader));
-                break;
+                return new InnerClassesAttr(pool, reader);
             case "BootstrapMethods":
-                table.append(new BoostrapMethodsAttr(pool, reader));
-                break;
+                return new BoostrapMethodsAttr(pool, reader);
             case "MethodParameters":
-                table.append(new MethodParametersAttr(pool, reader));
-                break;
+                return new MethodParametersAttr(pool, reader);
             case "StackMapFrame":
                 // the most complex attribute
-                table.append(new StackMapTableAttr(pool, reader));
-                break;
+                return new StackMapTableAttr(pool, reader);
             default:
                 throw new ReadByteCodeException(
                         String.format("Unsupported attribute named %s", name)
@@ -130,61 +118,44 @@ public final class JvmClassFile {
     }
 
 
-    private static void parseConstant(JvmClassFileConstantPool pool, IByteCodeReader reader) {
+    public static IJvmConstant parseConstant(IByteCodeReader reader) {
         // read tag
         final byte tag = reader.readU1();
         switch (tag) {
             case JvmClassFileConstantEnum.UTF8_INFO:
-                pool.append(new ConstantUtf8(reader));
-                break;
+                return new ConstantUtf8(reader);
             case JvmClassFileConstantEnum.INTEGER_INFO:
-                pool.append(new ConstantInteger(reader));
-                break;
+                return new ConstantInteger(reader);
             case JvmClassFileConstantEnum.FLOAT_INFO:
-                pool.append(new ConstantFloat(reader));
-                break;
+                return new ConstantFloat(reader);
             case JvmClassFileConstantEnum.LONG_INFO:
-                pool.append(new ConstantLong(reader));
-                break;
+                return new ConstantLong(reader);
             case JvmClassFileConstantEnum.DOUBLE_INFO:
-                pool.append(new ConstantDouble(reader));
-                break;
+                return new ConstantDouble(reader);
             case JvmClassFileConstantEnum.CLASS_INFO:
-                pool.append(new ConstantClass(reader));
-                break;
+                return new ConstantClass(reader);
             case JvmClassFileConstantEnum.STRING_INFO:
-                pool.append(new ConstantString(reader));
-                break;
+                return new ConstantString(reader);
             case JvmClassFileConstantEnum.FIELD_REF_INFO:
-                pool.append(new ConstantFieldRef(reader));
-                break;
+                return new ConstantFieldRef(reader);
             case JvmClassFileConstantEnum.METHOD_REF_INFO:
-                pool.append(new ConstantMethodRef(reader));
-                break;
+                return new ConstantMethodRef(reader);
             case JvmClassFileConstantEnum.INTERFACE_METHOD_REF_INFO:
-                pool.append(new ConstantInterfaceMethodRef(reader));
-                break;
+                return new ConstantInterfaceMethodRef(reader);
             case JvmClassFileConstantEnum.NAME_AND_TYPE_INFO:
-                pool.append(new ConstantNameAndType(reader));
-                break;
+                return new ConstantNameAndType(reader);
             case JvmClassFileConstantEnum.METHOD_HANDLE_INFO:
-                pool.append(new ConstantMethodHandle(reader));
-                break;
+                return new ConstantMethodHandle(reader);
             case JvmClassFileConstantEnum.METHOD_TYPE_INFO:
-                pool.append(new ConstantMethodType(reader));
-                break;
+                return new ConstantMethodType(reader);
             case JvmClassFileConstantEnum.DYNAMIC_INFO:
-                pool.append(new ConstantDynamic(reader));
-                break;
+                return new ConstantDynamic(reader);
             case JvmClassFileConstantEnum.INVOKE_DYNAMIC_INFO:
-                pool.append(new ConstantInvokeDynamic(reader));
-                break;
+                return new ConstantInvokeDynamic(reader);
             case JvmClassFileConstantEnum.MODULE_INFO:
-                pool.append(new ConstantModule(reader));
-                break;
+                return new ConstantModule(reader);
             case JvmClassFileConstantEnum.PACKAGE_INFO:
-                pool.append(new ConstantPackage(reader));
-                break;
+                return new ConstantPackage(reader);
             default:
                 throw new ReadByteCodeException(
                         String.format("Unsupported constant with tag '%s'", tag)

@@ -41,4 +41,9 @@ public class JvmClassFileParserTest {
         assertEquals(2, classFile.getSuperClass());
         assertEquals(0, classFile.getInterfaces().length);
     }
+
+    @Test
+    public void shouldGetCorrectAttribute() throws Throwable {
+
+    }
 }

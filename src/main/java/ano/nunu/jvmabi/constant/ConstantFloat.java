@@ -2,15 +2,19 @@ package ano.nunu.jvmabi.constant;
 
 import ano.nunu.jvmabi.JvmClassFileConstantEnum;
 import ano.nunu.jvmabi.reader.IByteCodeReader;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.io.Serializable;
 
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public final class ConstantFloat implements Serializable, IJvmConstant {
     private float value;
-
-    public ConstantFloat() {}
-
-    public ConstantFloat(float value) { this.value = value; }
 
     public ConstantFloat(IByteCodeReader reader) { read(reader); }
 
@@ -19,8 +23,6 @@ public final class ConstantFloat implements Serializable, IJvmConstant {
 
     @Override
     public void read(IByteCodeReader reader) { value = Float.intBitsToFloat(reader.readU4()); }
-
-    public float getFloatValue() { return value; }
 
     @Override
     public String toString() {

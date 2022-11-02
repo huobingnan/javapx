@@ -5,6 +5,7 @@ import ano.nunu.jvmabi.reader.IByteCodeReader;
 
 import java.io.Serializable;
 
+
 public final class ConstantModule implements Serializable, IJvmConstant {
 
     private short nameIndex; // 指向常量池中一个CONSTANT_Utf8_Info

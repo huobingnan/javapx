@@ -2,13 +2,19 @@ package ano.nunu.jvmabi.constant;
 
 import ano.nunu.jvmabi.JvmClassFileConstantEnum;
 import ano.nunu.jvmabi.reader.IByteCodeReader;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.io.Serializable;
 
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public final class ConstantInteger implements Serializable, IJvmConstant {
     private int value;
-
-    public ConstantInteger() {}
 
     public ConstantInteger(IByteCodeReader reader) { read(reader); }
     @Override
@@ -16,8 +22,6 @@ public final class ConstantInteger implements Serializable, IJvmConstant {
 
     @Override
     public void read(IByteCodeReader reader) { value = reader.readU4(); }
-
-    public int getIntValue() { return value; }
 
     @Override
     public String toString() {

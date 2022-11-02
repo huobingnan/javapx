@@ -2,20 +2,20 @@ package ano.nunu.jvmabi.constant;
 
 import ano.nunu.jvmabi.JvmClassFileConstantEnum;
 import ano.nunu.jvmabi.reader.IByteCodeReader;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.io.Serializable;
 
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public final class ConstantNameAndType implements Serializable, IJvmConstant {
-
     private short nameIndex;       // 指向常量池中一个名称常量
     private short descriptorIndex; // 指向常量池中一个描述符常量
-
-    public ConstantNameAndType() {}
-
-    public ConstantNameAndType(short nameIndex, short descriptorIndex) {
-        this.nameIndex = nameIndex;
-        this.descriptorIndex = descriptorIndex;
-    }
 
     public ConstantNameAndType(IByteCodeReader reader) { read(reader); }
 
@@ -27,10 +27,6 @@ public final class ConstantNameAndType implements Serializable, IJvmConstant {
         nameIndex = reader.readU2();
         descriptorIndex = reader.readU2();
     }
-
-    public short getNameIndex() { return nameIndex; }
-
-    public short getDescriptorIndex() { return descriptorIndex; }
 
     @Override
     public String toString() {

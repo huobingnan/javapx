@@ -2,20 +2,20 @@ package ano.nunu.jvmabi.constant;
 
 import ano.nunu.jvmabi.JvmClassFileConstantEnum;
 import ano.nunu.jvmabi.reader.IByteCodeReader;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.io.Serializable;
 
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public final class ConstantMethodHandle implements Serializable, IJvmConstant {
-
     private short referenceKind;
     private short referenceIndex;
-
-    public ConstantMethodHandle() {}
-
-    public ConstantMethodHandle(short referenceKind, short referenceIndex) {
-        this.referenceKind = referenceKind;
-        this.referenceIndex = referenceIndex;
-    }
 
     public ConstantMethodHandle(IByteCodeReader reader) { read(reader); }
 
@@ -27,10 +27,6 @@ public final class ConstantMethodHandle implements Serializable, IJvmConstant {
         referenceKind = reader.readU2();
         referenceIndex = reader.readU2();
     }
-
-    public short getReferenceKind() { return referenceKind; }
-
-    public short getReferenceIndex() { return referenceIndex; }
 
     @Override
     public String toString() {

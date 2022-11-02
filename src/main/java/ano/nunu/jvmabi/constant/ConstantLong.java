@@ -2,16 +2,19 @@ package ano.nunu.jvmabi.constant;
 
 import ano.nunu.jvmabi.JvmClassFileConstantEnum;
 import ano.nunu.jvmabi.reader.IByteCodeReader;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.io.Serializable;
 
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public final class ConstantLong implements Serializable, IJvmConstant {
-
     private long value;
-
-    public ConstantLong() {}
-
-    public ConstantLong(long longValue) { value = longValue; }
 
     public ConstantLong(IByteCodeReader reader) { read(reader); }
 

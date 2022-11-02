@@ -2,16 +2,20 @@ package ano.nunu.jvmabi.constant;
 
 import ano.nunu.jvmabi.JvmClassFileConstantEnum;
 import ano.nunu.jvmabi.reader.IByteCodeReader;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.io.Serializable;
 import java.nio.charset.StandardCharsets;
 
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public final class ConstantUtf8 implements Serializable, IJvmConstant {
     private byte[] bytes;
-
-    public ConstantUtf8() {}
-
-    public ConstantUtf8(byte[] bytes) { this.bytes = bytes; }
 
     public ConstantUtf8(IByteCodeReader reader) { read(reader); }
 

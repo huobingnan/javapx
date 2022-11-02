@@ -27,8 +27,10 @@ public class JvmClassFileParserTest {
         assertEquals(JvmClassFileConstantEnum.NAME_AND_TYPE_INFO, pool.get(3).getTag());
         assertEquals(JvmClassFileConstantEnum.UTF8_INFO, pool.get(6).getTag());
         assertEquals(JvmClassFileConstantEnum.UTF8_INFO, pool.get(24).getTag());
-        assertEquals(11, pool.<ConstantNameAndType>getExact(9).getNameIndex());
-        assertEquals(12, pool.<ConstantNameAndType>getExact(9).getDescriptorIndex());
+        final short nameIndex = pool.<ConstantNameAndType>getExact(9).getNameIndex();
+        final short descIndex = pool.<ConstantNameAndType>getExact(9).getDescriptorIndex();
+        assertEquals(11, nameIndex);
+        assertEquals(12, descIndex);
         for (int i = 1, len = pool.length(); i < len; i++) {
             System.out.println(i + ": " + pool.get(i));
         }

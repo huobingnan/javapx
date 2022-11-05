@@ -4,12 +4,16 @@ import ano.nunu.jvmabi.attribute.*;
 import ano.nunu.jvmabi.constant.*;
 import ano.nunu.jvmabi.attribute.*;
 import ano.nunu.jvmabi.constant.*;
+import ano.nunu.jvmabi.field.FieldItem;
+import ano.nunu.jvmabi.method.MethodItem;
 import ano.nunu.jvmabi.reader.BufferedByteCodeReader;
 import ano.nunu.jvmabi.reader.IByteCodeReader;
 import ano.nunu.jvmabi.reader.ReadByteCodeException;
+import lombok.Getter;
 
 import java.io.InputStream;
 
+@Getter
 public final class JvmClassFile {
 
     private int magic;                                 // 魔数
@@ -21,23 +25,9 @@ public final class JvmClassFile {
     private short thisClass;                           // 本类在常量池中的索引
     private short superClass;                          // 超类在常量池中的索引
     private short[] interfaces;                        // 实现的接口集合
-    private JvmClassFileAttrTable attributes;          // 属性表
-
-    public int getMagic() { return magic; }
-
-    public short getMinorVersion() { return minorVersion; }
-
-    public short getMajorVersion() { return majorVersion; }
-
-    public JvmClassFileConstantPool getConstantPool() { return constantPool; }
-
-    public short getAccessFlags() { return accessFlags; }
-
-    public short getThisClass() { return thisClass; }
-
-    public short getSuperClass() { return superClass; }
-
-    public short[] getInterfaces() { return interfaces; }
+    private JvmClassFileFieldTable fieldTable;         // 字段表
+    private JvmClassFileAttrTable attributeTable;      // 属性表
+    private JvmClassFileMethodTable methodTable;       // 方法表
 
     // Parse JVM Class File
     public static JvmClassFile parse(InputStream is)  {
@@ -62,6 +52,15 @@ public final class JvmClassFile {
             for (int i = 0, len = classFile.interfaces.length; i < len; i++) {
                 classFile.interfaces[i] = byteCodeReader.readU2();
             }
+            // parse field table
+            classFile.fieldTable = new JvmClassFileFieldTable(byteCodeReader.readU2());
+            parseFieldTable(classFile.fieldTable, classFile.constantPool, byteCodeReader);
+            // parse method table
+            classFile.methodTable = new JvmClassFileMethodTable(byteCodeReader.readU2());
+            parseMethodTable(classFile.methodTable, classFile.constantPool, byteCodeReader);
+            // parse attribute table
+            classFile.attributeTable = new JvmClassFileAttrTable(byteCodeReader.readU2());
+            parseAttributeTable(classFile.attributeTable, classFile.constantPool, byteCodeReader);
             return classFile;
         }catch (Exception ex) { throw new ReadByteCodeException(ex); }
     }
@@ -78,6 +77,49 @@ public final class JvmClassFile {
         for (int i = 0, len = table.length(); i < len; i++) {
             table.append(parseAttribute(pool, reader));
         }
+    }
+
+    private static void parseFieldTable(JvmClassFileFieldTable table,
+                                        JvmClassFileConstantPool pool,
+                                        IByteCodeReader reader) {
+        for (int i = 0, len = table.length(); i < len; i++) {
+            table.append(parseField(pool, reader));
+        }
+    }
+
+    private static void parseMethodTable(JvmClassFileMethodTable table,
+                                         JvmClassFileConstantPool pool,
+                                         IByteCodeReader reader) {
+
+        for (int i = 0, len = table.length(); i < len; i++) {
+            table.append(parseMethod(pool, reader));
+        }
+    }
+
+    public static MethodItem parseMethod(JvmClassFileConstantPool pool, IByteCodeReader reader) {
+        final MethodItem item = new MethodItem();
+        item.setAccessFlags(reader.readU2());
+        item.setNameIndex(reader.readU2());
+        item.setDescriptorIndex(reader.readU2());
+        final IJvmAttribute[] attributes = new IJvmAttribute[reader.readU2()];
+        for (int i = 0; i < attributes.length; i++) {
+            attributes[i] = parseAttribute(pool, reader);
+        }
+        item.setAttributes(attributes);
+        return item;
+    }
+
+    public static FieldItem parseField(JvmClassFileConstantPool pool, IByteCodeReader reader) {
+        final FieldItem item = new FieldItem();
+        item.setAccessFlags(reader.readU2());
+        item.setNameIndex(reader.readU2());
+        item.setDescriptorIndex(reader.readU2());
+        final IJvmAttribute[] attributes = new IJvmAttribute[reader.readU2()];
+        for (int i = 0; i < attributes.length; i++) {
+            attributes[i] = parseAttribute(pool, reader);
+        }
+        item.setAttributes(attributes);
+        return item;
     }
 
     public static IJvmAttribute parseAttribute(JvmClassFileConstantPool pool, IByteCodeReader reader) {
@@ -106,7 +148,7 @@ public final class JvmClassFile {
                 return new BoostrapMethodsAttr(pool, reader);
             case "MethodParameters":
                 return new MethodParametersAttr(pool, reader);
-            case "StackMapFrame":
+            case "StackMapTable":
                 // the most complex attribute
                 return new StackMapTableAttr(pool, reader);
             default:

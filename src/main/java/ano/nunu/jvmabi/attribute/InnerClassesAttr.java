@@ -2,16 +2,20 @@ package ano.nunu.jvmabi.attribute;
 
 import ano.nunu.jvmabi.reader.IByteCodeReader;
 import ano.nunu.jvmabi.JvmClassFileConstantPool;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.io.Serializable;
 
 // 记录内部类的信息
+@Getter
+@Setter
+@NoArgsConstructor
 public final class InnerClassesAttr implements Serializable, IJvmAttribute {
 
     private int length;
     private InnerClassInfo[] classesInfo;
-
-    public InnerClassesAttr() {}
 
     public InnerClassesAttr(JvmClassFileConstantPool pool, IByteCodeReader reader) { read(pool, reader); }
 
@@ -35,7 +39,4 @@ public final class InnerClassesAttr implements Serializable, IJvmAttribute {
     @Override
     public int getAttrLength() { return length; }
 
-    public int length() { return length; }
-
-    public InnerClassInfo get(int index) { return classesInfo[index]; }
 }

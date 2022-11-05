@@ -2,13 +2,17 @@ package ano.nunu.jvmabi.attribute;
 
 import ano.nunu.jvmabi.JvmClassFileConstantPool;
 import ano.nunu.jvmabi.reader.IByteCodeReader;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+@Getter
+@Setter
+@NoArgsConstructor
 public class BoostrapMethodsAttr implements IJvmAttribute {
 
     private int length;
     private BootstrapMethod[] methods;
-
-    public BoostrapMethodsAttr() {}
 
     public BoostrapMethodsAttr(JvmClassFileConstantPool pool, IByteCodeReader reader) { read(pool, reader); }
 

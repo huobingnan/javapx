@@ -2,15 +2,19 @@ package ano.nunu.jvmabi.attribute;
 
 import ano.nunu.jvmabi.JvmClassFileConstantPool;
 import ano.nunu.jvmabi.reader.IByteCodeReader;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.io.Serializable;
 
+@Getter
+@Setter
+@NoArgsConstructor
 public final class ConstantValueAttr implements Serializable, IJvmAttribute {
 
     private int length;
     private short constantValueIndex;
-
-    public ConstantValueAttr() {}
 
     public ConstantValueAttr(JvmClassFileConstantPool pool, IByteCodeReader reader) { read(pool, reader); }
 
@@ -26,6 +30,4 @@ public final class ConstantValueAttr implements Serializable, IJvmAttribute {
     @Override
     public int getAttrLength() { return length; }
 
-
-    public short getConstantValueIndex() { return constantValueIndex; }
 }

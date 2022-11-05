@@ -1,12 +1,17 @@
 package ano.nunu.jvmabi.attribute;
 
-public final class CodeExceptionInfo {
-    private short startPC, endPC, handlerPC, catchType;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-    public CodeExceptionInfo(short startPC, short endPC, short handlerPC, short catchType) {
-        this.startPC = startPC;
-        this.endPC = endPC;
-        this.handlerPC = handlerPC;
-        this.catchType = catchType;
-    }
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+public final class CodeExceptionInfo {
+    private short startPC;
+    private short endPC;
+    private short handlerPC;
+    private short catchType;
 }

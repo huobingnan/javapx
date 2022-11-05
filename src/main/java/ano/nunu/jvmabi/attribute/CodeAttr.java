@@ -3,9 +3,13 @@ package ano.nunu.jvmabi.attribute;
 import ano.nunu.jvmabi.JvmClassFile;
 import ano.nunu.jvmabi.JvmClassFileConstantPool;
 import ano.nunu.jvmabi.reader.IByteCodeReader;
+import lombok.*;
 
 import java.io.Serializable;
 
+@Getter
+@Setter
+@NoArgsConstructor
 public final class CodeAttr implements Serializable, IJvmAttribute {
 
     private int length;
@@ -14,8 +18,6 @@ public final class CodeAttr implements Serializable, IJvmAttribute {
     private byte[] code;
     private CodeExceptionInfo[] exceptionTable;
     private IJvmAttribute[] attributes;
-
-    public CodeAttr() {}
 
     public CodeAttr(JvmClassFileConstantPool pool, IByteCodeReader reader) { read(pool, reader); }
 

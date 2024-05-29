@@ -7,6 +7,7 @@ import ano.nunu.jvmabi.constant.*;
 import ano.nunu.jvmabi.field.FieldItem;
 import ano.nunu.jvmabi.method.MethodItem;
 import ano.nunu.jvmabi.reader.BufferedByteCodeReader;
+import ano.nunu.jvmabi.reader.DefaultByteCodeReader;
 import ano.nunu.jvmabi.reader.IByteCodeReader;
 import ano.nunu.jvmabi.reader.ReadByteCodeException;
 import lombok.Getter;
@@ -32,7 +33,7 @@ public final class JvmClassFile {
     // Parse JVM Class File
     public static JvmClassFile parse(InputStream is)  {
         final JvmClassFile classFile = new JvmClassFile();
-        try(final IByteCodeReader byteCodeReader = new BufferedByteCodeReader(is)) {
+        try(final IByteCodeReader byteCodeReader = new DefaultByteCodeReader(is)) {
             // parse header info
             classFile.magic = byteCodeReader.readU4();
             classFile.minorVersion = byteCodeReader.readU2();

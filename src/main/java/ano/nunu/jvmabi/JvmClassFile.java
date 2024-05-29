@@ -30,10 +30,13 @@ public final class JvmClassFile {
     private JvmClassFileAttrTable attributeTable;      // 属性表
     private JvmClassFileMethodTable methodTable;       // 方法表
 
+    public static JvmClassFile parse(InputStream is) {
+        return parse(new DefaultByteCodeReader(is));
+    }
     // Parse JVM Class File
-    public static JvmClassFile parse(InputStream is)  {
+    public static JvmClassFile parse(final IByteCodeReader byteCodeReader)  {
         final JvmClassFile classFile = new JvmClassFile();
-        try(final IByteCodeReader byteCodeReader = new DefaultByteCodeReader(is)) {
+        try(byteCodeReader) {
             // parse header info
             classFile.magic = byteCodeReader.readU4();
             classFile.minorVersion = byteCodeReader.readU2();

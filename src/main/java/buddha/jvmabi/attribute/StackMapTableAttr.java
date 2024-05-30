@@ -1,7 +1,6 @@
 package buddha.jvmabi.attribute;
 
 import buddha.jvmabi.JvmClassFileConstantPool;
-import buddha.jvmabi.Unsigned;
 import buddha.jvmabi.reader.IByteCodeReader;
 import buddha.jvmabi.reader.ReadByteCodeException;
 import buddha.jvmabi.attribute.stkmaptbl.*;
@@ -22,10 +21,11 @@ public class StackMapTableAttr implements IJvmAttribute {
         length = reader.readU4();
         entries = new IStackMapFrame[reader.readU2()];
         for (int i = 0; i < entries.length; i++) {
-            final int tag = Unsigned.cbi(reader.readU1());
-            if (tag >= 0 && tag <=63) {
+            // TODO： 这里的取值待商榷
+            final int tag = Byte.toUnsignedInt(reader.readU1());
+            if (tag <=63) {
                 entries[i] = new SameFrame(tag);
-            } else if (tag >= 64 && tag <= 127) {
+            } else if (tag <= 127) {
                 entries[i] = new SameLocals1Frame(tag, readVerification(reader));
             } else if (tag == 274) {
                 entries[i] = new SameLocals1FrameExtended(tag, reader.readU2(), readVerification(reader));

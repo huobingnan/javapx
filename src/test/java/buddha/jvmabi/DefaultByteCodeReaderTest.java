@@ -1,16 +1,17 @@
 package buddha.jvmabi;
 
-import buddha.jvmabi.reader.BufferedByteCodeReader;
+import buddha.jvmabi.reader.DefaultByteCodeReader;
+import buddha.jvmabi.reader.IByteCodeReader;
 import org.junit.jupiter.api.Test;
 
 import java.io.FileInputStream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class BufferedByteCodeReaderTest {
-    final BufferedByteCodeReader reader = new BufferedByteCodeReader(new FileInputStream("data/BiLock.class"));
+public class DefaultByteCodeReaderTest {
 
-    public BufferedByteCodeReaderTest() throws Throwable { }
+    private final IByteCodeReader reader = new DefaultByteCodeReader(new FileInputStream("data/BiLock.class"));
+    public DefaultByteCodeReaderTest() throws Throwable { }
 
     @Test
     public void shouldGetMagicNumber() {

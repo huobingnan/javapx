@@ -1,6 +1,6 @@
 package buddha.jvmabi.constant;
 
-import buddha.jvmabi.JvmClassFileConstantEnum;
+import buddha.jvmabi.ClassFileConstantTagConst;
 import buddha.jvmabi.reader.IByteCodeReader;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -19,7 +19,7 @@ public final class ConstantClass implements Serializable, IJvmConstant {
     public ConstantClass(IByteCodeReader reader) { read(reader); }
 
     @Override
-    public byte getTag() { return JvmClassFileConstantEnum.CLASS_INFO; }
+    public byte getTag() { return ClassFileConstantTagConst.CLASS_INFO; }
 
     @Override
     public void read(IByteCodeReader reader) { nameIndex = reader.readU2(); }

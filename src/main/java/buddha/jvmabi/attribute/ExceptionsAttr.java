@@ -1,7 +1,8 @@
 package buddha.jvmabi.attribute;
 
+import buddha.jvmabi.AttributeType;
 import buddha.jvmabi.reader.IByteCodeReader;
-import buddha.jvmabi.JvmClassFileConstantPool;
+import buddha.jvmabi.ClassFileConstantPool;
 
 import java.io.Serializable;
 
@@ -18,13 +19,13 @@ public final class ExceptionsAttr implements Serializable, IJvmAttribute {
         this.exceptionsIndex = exceptionsIndex;
     }
 
-    public ExceptionsAttr(JvmClassFileConstantPool pool, IByteCodeReader reader) { read(pool, reader); }
+    public ExceptionsAttr(ClassFileConstantPool pool, IByteCodeReader reader) { read(pool, reader); }
 
     @Override
-    public String name() { return "Exceptions"; }
+    public AttributeType type() { return AttributeType.EXCEPTIONS; }
 
     @Override
-    public void read(JvmClassFileConstantPool pool, IByteCodeReader reader) {
+    public void read(ClassFileConstantPool pool, IByteCodeReader reader) {
         length = reader.readU4();
         exceptionsIndex = new short[reader.readU2()];
         for (int i = 0; i < exceptionsIndex.length; i++)

@@ -1,13 +1,14 @@
 package buddha.jvmabi.attribute;
 
+import buddha.jvmabi.AttributeType;
 import buddha.jvmabi.reader.IByteCodeReader;
-import buddha.jvmabi.JvmClassFileConstantPool;
+import buddha.jvmabi.ClassFileConstantPool;
 
 public interface IJvmAttribute {
 
-    String name();
+    AttributeType type();
 
-    void read(JvmClassFileConstantPool pool, IByteCodeReader reader);
+    void read(ClassFileConstantPool pool, IByteCodeReader reader);
 
     int getAttrLength();
 }

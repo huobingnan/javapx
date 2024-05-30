@@ -1,6 +1,6 @@
 package buddha.jvmabi;
 
-public final class JvmClassFileAccessFlagEnum {
+public final class ClassFileAccFlagConst {
     public static final short ACC_PUBLIC       = 0x0001;
     public static final short ACC_FINAL        = 0x0010;
     public static final short ACC_SUPER        = 0x0020;

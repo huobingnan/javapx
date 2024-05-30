@@ -6,6 +6,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+
+/**
+ * 方法条目
+ */
 @Getter
 @Setter
 @NoArgsConstructor

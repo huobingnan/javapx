@@ -1,6 +1,6 @@
 package buddha.jvmabi;
 
-public final class JvmOpcodeEnum {
+public final class OpcodeConst {
     public static final byte NOP                   = 0x00;
     // push a constant value to the operand stack
     public static final byte A_CONST_NULL          = 0x01;

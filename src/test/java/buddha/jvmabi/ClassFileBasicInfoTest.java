@@ -4,13 +4,14 @@ import buddha.jvmabi.constant.ConstantNameAndType;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.io.FileInputStream;
-
-public class JvmClassFileParserTest {
+/**
+ * ClassFile基本信息测试类
+ * @author BRYAN
+ */
+public class ClassFileBasicInfoTest extends BaseTest {
 
     @Test
     public void shouldGetCorrectHeaderInfo() throws Throwable {
-        final JvmClassFile classFile = JvmClassFile.parse(new FileInputStream("data/BiLock.class"));
         assertEquals(0xCAFEBABE, classFile.getMagic());
         assertEquals(0x0000, classFile.getMinorVersion());
         assertEquals(0x003D, classFile.getMajorVersion());
@@ -19,14 +20,13 @@ public class JvmClassFileParserTest {
 
     @Test
     public void shouldGetCorrectConstantPoolInfo() throws Throwable {
-        final JvmClassFile classFile = JvmClassFile.parse(new FileInputStream("data/BiLock.class"));
-        final JvmClassFileConstantPool pool = classFile.getConstantPool();
+        final ClassFileConstantPool pool = classFile.getConstantPool();
         assertEquals(25, pool.length());
-        assertEquals(JvmClassFileConstantEnum.METHOD_REF_INFO, pool.get(1).getTag());
-        assertEquals(JvmClassFileConstantEnum.CLASS_INFO, pool.get(2).getTag());
-        assertEquals(JvmClassFileConstantEnum.NAME_AND_TYPE_INFO, pool.get(3).getTag());
-        assertEquals(JvmClassFileConstantEnum.UTF8_INFO, pool.get(6).getTag());
-        assertEquals(JvmClassFileConstantEnum.UTF8_INFO, pool.get(24).getTag());
+        assertEquals(ClassFileConstantTagConst.METHOD_REF_INFO, pool.get(1).getTag());
+        assertEquals(ClassFileConstantTagConst.CLASS_INFO, pool.get(2).getTag());
+        assertEquals(ClassFileConstantTagConst.NAME_AND_TYPE_INFO, pool.get(3).getTag());
+        assertEquals(ClassFileConstantTagConst.UTF8_INFO, pool.get(6).getTag());
+        assertEquals(ClassFileConstantTagConst.UTF8_INFO, pool.get(24).getTag());
         final short nameIndex = pool.<ConstantNameAndType>getExact(9).getNameIndex();
         final short descIndex = pool.<ConstantNameAndType>getExact(9).getDescriptorIndex();
         assertEquals(11, nameIndex);
@@ -38,14 +38,14 @@ public class JvmClassFileParserTest {
 
     @Test
     public void shouldGetCorrectDescriptorInfo() throws Throwable {
-        final JvmClassFile classFile = JvmClassFile.parse(new FileInputStream("data/BiLock.class"));
         assertEquals(8, classFile.getThisClass());
         assertEquals(2, classFile.getSuperClass());
         assertEquals(0, classFile.getInterfaces().length);
     }
 
-    @Test
-    public void shouldGetCorrectAttribute() throws Throwable {
 
+    @Override
+    String getClassFilename() {
+        return "data/BiLock.class";
     }
 }

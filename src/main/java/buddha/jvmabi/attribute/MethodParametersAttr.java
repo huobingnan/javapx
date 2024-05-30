@@ -1,6 +1,7 @@
 package buddha.jvmabi.attribute;
 
-import buddha.jvmabi.JvmClassFileConstantPool;
+import buddha.jvmabi.AttributeType;
+import buddha.jvmabi.ClassFileConstantPool;
 import buddha.jvmabi.reader.IByteCodeReader;
 
 public class MethodParametersAttr implements IJvmAttribute {
@@ -9,13 +10,13 @@ public class MethodParametersAttr implements IJvmAttribute {
 
     public MethodParametersAttr() {}
 
-    public MethodParametersAttr(JvmClassFileConstantPool pool, IByteCodeReader reader) { read(pool, reader); }
+    public MethodParametersAttr(ClassFileConstantPool pool, IByteCodeReader reader) { read(pool, reader); }
 
     @Override
-    public String name() { return "MethodParameters"; }
+    public AttributeType type() { return AttributeType.METHOD_PARAMETERS; }
 
     @Override
-    public void read(JvmClassFileConstantPool pool, IByteCodeReader reader) {
+    public void read(ClassFileConstantPool pool, IByteCodeReader reader) {
         length = reader.readU4();
         parameters = new MethodParameter[reader.readU1()];
         for (int i = 0; i < parameters.length; i++) {

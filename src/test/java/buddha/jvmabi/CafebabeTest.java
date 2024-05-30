@@ -8,10 +8,10 @@ import java.io.FileInputStream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class DefaultByteCodeReaderTest {
+public class CafebabeTest {
 
     private final IByteCodeReader reader = new DefaultByteCodeReader(new FileInputStream("data/BiLock.class"));
-    public DefaultByteCodeReaderTest() throws Throwable { }
+    public CafebabeTest() throws Throwable { }
 
     @Test
     public void shouldGetMagicNumber() {

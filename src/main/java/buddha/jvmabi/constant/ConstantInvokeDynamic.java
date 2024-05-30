@@ -1,6 +1,6 @@
 package buddha.jvmabi.constant;
 
-import buddha.jvmabi.JvmClassFileConstantEnum;
+import buddha.jvmabi.ClassFileConstantTagConst;
 import buddha.jvmabi.reader.IByteCodeReader;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -21,7 +21,7 @@ public final class ConstantInvokeDynamic implements Serializable, IJvmConstant {
     public ConstantInvokeDynamic(IByteCodeReader reader) { read(reader); }
 
     @Override
-    public byte getTag() { return JvmClassFileConstantEnum.INVOKE_DYNAMIC_INFO; }
+    public byte getTag() { return ClassFileConstantTagConst.INVOKE_DYNAMIC_INFO; }
 
     @Override
     public void read(IByteCodeReader reader) {

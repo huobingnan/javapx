@@ -1,6 +1,6 @@
 package buddha.jvmabi;
 
-public class JvmClassFileConstantEnum {
+public class ClassFileConstantTagConst {
     public static final byte UTF8_INFO = 1;
     public static final byte INTEGER_INFO = 3;
     public static final byte FLOAT_INFO = 4;

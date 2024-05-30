@@ -1,6 +1,7 @@
 package buddha.jvmabi.attribute;
 
-import buddha.jvmabi.JvmClassFileConstantPool;
+import buddha.jvmabi.AttributeType;
+import buddha.jvmabi.ClassFileConstantPool;
 import buddha.jvmabi.reader.IByteCodeReader;
 import buddha.jvmabi.reader.ReadByteCodeException;
 import buddha.jvmabi.attribute.stkmaptbl.*;
@@ -11,13 +12,13 @@ public class StackMapTableAttr implements IJvmAttribute {
 
     public StackMapTableAttr() {}
 
-    public StackMapTableAttr(JvmClassFileConstantPool pool, IByteCodeReader reader) { read(pool, reader); }
+    public StackMapTableAttr(ClassFileConstantPool pool, IByteCodeReader reader) { read(pool, reader); }
 
     @Override
-    public String name() { return "StackMapTable"; }
+    public AttributeType type() { return AttributeType.STACK_MAP_TABLE; }
 
     @Override
-    public void read(JvmClassFileConstantPool pool, IByteCodeReader reader) {
+    public void read(ClassFileConstantPool pool, IByteCodeReader reader) {
         length = reader.readU4();
         entries = new IStackMapFrame[reader.readU2()];
         for (int i = 0; i < entries.length; i++) {

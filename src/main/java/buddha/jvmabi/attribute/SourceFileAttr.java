@@ -1,7 +1,8 @@
 package buddha.jvmabi.attribute;
 
+import buddha.jvmabi.AttributeType;
 import buddha.jvmabi.reader.IByteCodeReader;
-import buddha.jvmabi.JvmClassFileConstantPool;
+import buddha.jvmabi.ClassFileConstantPool;
 
 import java.io.Serializable;
 
@@ -17,13 +18,13 @@ public final class SourceFileAttr implements Serializable, IJvmAttribute {
         this.index = index;
     }
 
-    public SourceFileAttr(JvmClassFileConstantPool pool, IByteCodeReader reader) { read(pool, reader); }
+    public SourceFileAttr(ClassFileConstantPool pool, IByteCodeReader reader) { read(pool, reader); }
 
     @Override
-    public String name() { return "SourceFile"; }
+    public AttributeType type() { return AttributeType.SOURCE_FILE; }
 
     @Override
-    public void read(JvmClassFileConstantPool pool, IByteCodeReader reader) {
+    public void read(ClassFileConstantPool pool, IByteCodeReader reader) {
         length = reader.readU4();
         index  = reader.readU2();
     }

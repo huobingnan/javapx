@@ -1,6 +1,7 @@
 package buddha.jvmabi.attribute;
 
-import buddha.jvmabi.JvmClassFileConstantPool;
+import buddha.jvmabi.AttributeType;
+import buddha.jvmabi.ClassFileConstantPool;
 import buddha.jvmabi.reader.IByteCodeReader;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,13 +17,13 @@ public final class ConstantValueAttr implements Serializable, IJvmAttribute {
     private int length;
     private short constantValueIndex;
 
-    public ConstantValueAttr(JvmClassFileConstantPool pool, IByteCodeReader reader) { read(pool, reader); }
+    public ConstantValueAttr(ClassFileConstantPool pool, IByteCodeReader reader) { read(pool, reader); }
 
     @Override
-    public String name() { return "ConstantValue"; }
+    public AttributeType type() { return AttributeType.CONSTANT_VALUE; }
 
     @Override
-    public void read(JvmClassFileConstantPool pool, IByteCodeReader reader) {
+    public void read(ClassFileConstantPool pool, IByteCodeReader reader) {
         length = reader.readU4();
         constantValueIndex = reader.readU2();
     }

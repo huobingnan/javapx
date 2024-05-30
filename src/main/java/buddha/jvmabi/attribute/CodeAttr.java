@@ -1,12 +1,17 @@
 package buddha.jvmabi.attribute;
 
-import buddha.jvmabi.JvmClassFile;
-import buddha.jvmabi.JvmClassFileConstantPool;
+import buddha.jvmabi.AttributeType;
+import buddha.jvmabi.ClassFile;
+import buddha.jvmabi.ClassFileConstantPool;
 import buddha.jvmabi.reader.IByteCodeReader;
 import lombok.*;
 
 import java.io.Serializable;
 
+/**
+ * 代码属性
+ * @author BRYAN
+ */
 @Getter
 @Setter
 @NoArgsConstructor
@@ -19,13 +24,13 @@ public final class CodeAttr implements Serializable, IJvmAttribute {
     private CodeExceptionInfo[] exceptionTable;
     private IJvmAttribute[] attributes;
 
-    public CodeAttr(JvmClassFileConstantPool pool, IByteCodeReader reader) { read(pool, reader); }
+    public CodeAttr(ClassFileConstantPool pool, IByteCodeReader reader) { read(pool, reader); }
 
     @Override
-    public String name() { return "Code"; }
+    public AttributeType type() { return AttributeType.CODE; }
 
     @Override
-    public void read(JvmClassFileConstantPool pool, IByteCodeReader reader) {
+    public void read(ClassFileConstantPool pool, IByteCodeReader reader) {
         length = reader.readU4();
         maxStack = reader.readU2();
         maxLocals = reader.readU2();
@@ -39,7 +44,7 @@ public final class CodeAttr implements Serializable, IJvmAttribute {
         attributes = new IJvmAttribute[reader.readU2()];
 
         for (int i = 0; i < attributes.length; i++) {
-            attributes[i] = JvmClassFile.parseAttribute(pool, reader);
+            attributes[i] = ClassFile.parseAttribute(pool, reader);
         }
     }
 

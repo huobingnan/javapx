@@ -3,11 +3,11 @@ package buddha.jvmabi;
 import buddha.jvmabi.field.FieldItem;
 
 
-public class JvmClassFileFieldTable {
+public class ClassFileFieldTable {
     private final FieldItem[] fields;
     private int appendCursor;
 
-    public JvmClassFileFieldTable(int count) {
+    public ClassFileFieldTable(int count) {
         fields = new FieldItem[count];
         appendCursor = 0;
     }

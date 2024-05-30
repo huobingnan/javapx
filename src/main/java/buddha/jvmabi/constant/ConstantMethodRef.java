@@ -1,6 +1,6 @@
 package buddha.jvmabi.constant;
 
-import buddha.jvmabi.JvmClassFileConstantEnum;
+import buddha.jvmabi.ClassFileConstantTagConst;
 import buddha.jvmabi.reader.IByteCodeReader;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -20,7 +20,7 @@ public final class ConstantMethodRef implements Serializable, IJvmConstant {
     public ConstantMethodRef(IByteCodeReader reader) { read(reader); }
 
     @Override
-    public byte getTag() { return JvmClassFileConstantEnum.METHOD_REF_INFO; }
+    public byte getTag() { return ClassFileConstantTagConst.METHOD_REF_INFO; }
 
     @Override
     public void read(IByteCodeReader reader) {

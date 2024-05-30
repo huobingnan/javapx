@@ -1,7 +1,5 @@
 package buddha.jvmabi;
 
-import ano.nunu.jvmabi.attribute.*;
-import ano.nunu.jvmabi.constant.*;
 import buddha.jvmabi.field.FieldItem;
 import buddha.jvmabi.method.MethodItem;
 import buddha.jvmabi.reader.DefaultByteCodeReader;

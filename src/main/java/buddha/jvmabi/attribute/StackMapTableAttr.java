@@ -2,7 +2,6 @@ package buddha.jvmabi.attribute;
 
 import buddha.jvmabi.JvmClassFileConstantPool;
 import buddha.jvmabi.Unsigned;
-import ano.nunu.jvmabi.attribute.stkmaptbl.*;
 import buddha.jvmabi.reader.IByteCodeReader;
 import buddha.jvmabi.reader.ReadByteCodeException;
 import buddha.jvmabi.attribute.stkmaptbl.*;

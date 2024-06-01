@@ -1,4 +1,5 @@
 package buddha.jvmabi;
+import buddha.jvmabi.attribute.BootstrapMethodsAttr;
 import buddha.jvmabi.constant.*;
 import org.junit.jupiter.api.Test;
 
@@ -6,11 +7,33 @@ import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * 常量池解析测试
+ * 这个测试类对以下常量类型做了简单测试：
+ *  1. CONSTANT_Utf8_info
+ *  2. CONSTANT_Methodref_info
+ *  3. CONSTANT_Fieldref_info
+ *  4. CONSTANT_Integer_info
+ *  5. CONSTANT_Float_info
+ *  6. CONSTANT_Long_info
+ *  7. CONSTANT_Double_info
+ *  8. CONSTANT_NameAndType_info
+ *  9. CONSTANT_MethodType_info
+ *  10.CONSTANT_MethodHandle_info
+ *  11.CONSTANT_InvokeDynamic_info
+ *  12.CONSTANT_Class_info
+ * 未验证的常量
+ *  1. CONSTANT_String_info
+ *  2. CONSTANT_InterfaceMethodref_info
  */
 public class ConstantPool1Test extends BaseTest {
 
     private final ClassFileConstantPool cp = classFile.getConstantPool();
 
+    @Test
+    public void shouldGetCorrectClassInfo() {
+        int index = cp.<ConstantClass>getExact(12).getNameIndex();
+        assertEquals(14, index);
+        assertEquals("java/lang/System", cp.<ConstantUtf8>getExact(index).contentToString());
+    }
     @Test
     public void shouldGetCorrectBasicInfo() {
         assertEquals(0, classFile.getMinorVersion());
@@ -43,12 +66,6 @@ public class ConstantPool1Test extends BaseTest {
         // CONSTANT_Field_ref
         assertEquals(12, cp.<ConstantFieldRef>getExact(11).getClassIndex());
         assertEquals(13, cp.<ConstantFieldRef>getExact(11).getNameAndTypeIndex());
-        // TODO: CONSTANT_Interface_Method_ref
-    }
-
-    @Test
-    public void shouldGetCorrectStringInfo() {
-        // TODO
     }
 
     @Test
@@ -102,6 +119,15 @@ public class ConstantPool1Test extends BaseTest {
         assertEquals(6, cp.<ConstantMethodType>getExact(68).getDescriptorIndex());
         int index = cp.<ConstantMethodType>getExact(68).getDescriptorIndex();
         assertInstanceOf(ConstantUtf8.class, cp.get(index));
+    }
+
+    @Test
+    public void shouldGetCorrectInvokeDynamicInfo() {
+        int index = cp.<ConstantInvokeDynamic>getExact(7).getNameAndTypeIndex();
+        assertEquals(8, index);
+        assertInstanceOf(ConstantNameAndType.class, cp.get(index));
+        index = cp.<ConstantInvokeDynamic>getExact(7).getBootstrapMethodAttributeIndex();
+        assertEquals(0, index);
     }
 
 

@@ -1,5 +1,6 @@
 package buddha.jvmabi.method;
 
+import buddha.jvmabi.annotation.U2;
 import buddha.jvmabi.attribute.IJvmAttribute;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -15,8 +16,8 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public final class MethodItem {
-    private short accessFlags;
-    private short nameIndex;
-    private short descriptorIndex;
+    private @U2 int accessFlags;
+    private @U2 int nameIndex;
+    private @U2 int descriptorIndex;
     private IJvmAttribute[] attributes;
 }

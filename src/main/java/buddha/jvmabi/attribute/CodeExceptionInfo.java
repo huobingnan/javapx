@@ -1,5 +1,6 @@
 package buddha.jvmabi.attribute;
 
+import buddha.jvmabi.annotation.U2;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,11 +16,11 @@ import lombok.Setter;
 @AllArgsConstructor
 public final class CodeExceptionInfo {
     /** 起始PC */
-    private short startPC;
+    private @U2 int startPC;
     /** 结束PC */
-    private short endPC;
+    private @U2 int endPC;
     /** 处理PC */
-    private short handlerPC;
+    private @U2 int handlerPC;
     /** 捕获的异常类型 */
-    private short catchType;
+    private @U2 int catchType;
 }

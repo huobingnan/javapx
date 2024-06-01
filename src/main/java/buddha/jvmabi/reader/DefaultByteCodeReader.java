@@ -15,18 +15,18 @@ public class DefaultByteCodeReader implements IByteCodeReader {
         dis = new DataInputStream(is);
     }
     @Override
-    public byte readU1() {
+    public int readU1() {
         try {
-            return dis.readByte();
+            return dis.readUnsignedByte();
         } catch (IOException ex) {
             throw new ReadByteCodeException(ex);
         }
     }
 
     @Override
-    public short readU2() {
+    public int readU2() {
         try {
-            return dis.readShort();
+            return dis.readUnsignedShort();
         } catch (IOException ex) {
             throw new ReadByteCodeException(ex);
         }

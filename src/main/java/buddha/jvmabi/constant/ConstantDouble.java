@@ -1,6 +1,7 @@
 package buddha.jvmabi.constant;
 
 import buddha.jvmabi.ClassFileConstantTagConst;
+import buddha.jvmabi.annotation.U1;
 import buddha.jvmabi.reader.IByteCodeReader;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -18,8 +19,9 @@ public final class ConstantDouble implements Serializable, IJvmConstant {
 
     public ConstantDouble(IByteCodeReader reader) { read(reader); }
 
+    @U1
     @Override
-    public byte getTag() { return ClassFileConstantTagConst.DOUBLE_INFO; }
+    public int getTag() { return ClassFileConstantTagConst.DOUBLE_INFO; }
 
     @Override
     public void read(IByteCodeReader reader) {

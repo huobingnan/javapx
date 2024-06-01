@@ -1,5 +1,7 @@
 package buddha.jvmabi;
 
+import buddha.jvmabi.annotation.U2;
+import buddha.jvmabi.annotation.U4;
 import buddha.jvmabi.field.FieldItem;
 import buddha.jvmabi.method.MethodItem;
 import buddha.jvmabi.reader.DefaultByteCodeReader;
@@ -14,14 +16,14 @@ import java.io.InputStream;
 @Getter
 public final class ClassFile {
 
-    private int magic;                                 // 魔数
-    private short minorVersion;                        // 次版本号
-    private short majorVersion;                        // 主版本号
+    private @U4 int magic;                                 // 魔数
+    private @U2 int minorVersion;                        // 次版本号
+    private @U2 int majorVersion;                        // 主版本号
     private ClassFileConstantPool constantPool;     // 常量池
-    private short accessFlags;                         // 本类的访问权限
-    private short thisClass;                           // 本类在常量池中的索引
-    private short superClass;                          // 超类在常量池中的索引
-    private short[] interfaces;                        // 实现的接口集合
+    private @U2 int accessFlags;                         // 本类的访问权限
+    private @U2 int thisClass;                           // 本类在常量池中的索引
+    private @U2 int superClass;                          // 超类在常量池中的索引
+    private @U2 int[] interfaces;                        // 实现的接口集合
     private ClassFileFieldTable fieldTable;         // 字段表
     private ClassFileAttrTable attributeTable;      // 属性表
     private ClassFileMethodTable methodTable;       // 方法表
@@ -46,7 +48,7 @@ public final class ClassFile {
             classFile.accessFlags = byteCodeReader.readU2();
             classFile.thisClass = byteCodeReader.readU2();
             classFile.superClass = byteCodeReader.readU2();
-            classFile.interfaces = new short[byteCodeReader.readU2()];
+            classFile.interfaces = new int[byteCodeReader.readU2()];
 
             // parse interfaces index
             for (int i = 0, len = classFile.interfaces.length; i < len; i++) {
@@ -123,7 +125,7 @@ public final class ClassFile {
     }
 
      public static IJvmAttribute parseAttribute(ClassFileConstantPool pool, IByteCodeReader reader) {
-        final short attrNameIndex = reader.readU2(); // attribute name index
+        final int attrNameIndex = reader.readU2(); // attribute name index
         final String name = pool.<ConstantUtf8>getExact(attrNameIndex).contentToString(); // attribute name
         switch (name) {
             case "Code":
@@ -162,7 +164,7 @@ public final class ClassFile {
 
     public static IJvmConstant parseConstant(IByteCodeReader reader) {
         // read tag
-        final byte tag = reader.readU1();
+        final int tag = reader.readU1();
         switch (tag) {
             case ClassFileConstantTagConst.UTF8_INFO:
                 return new ConstantUtf8(reader);

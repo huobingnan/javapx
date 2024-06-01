@@ -1,6 +1,7 @@
 package buddha.jvmabi.constant;
 
 import buddha.jvmabi.ClassFileConstantTagConst;
+import buddha.jvmabi.annotation.U1;
 import buddha.jvmabi.reader.IByteCodeReader;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -15,18 +16,19 @@ import java.nio.charset.StandardCharsets;
 @NoArgsConstructor
 @AllArgsConstructor
 public final class ConstantUtf8 implements Serializable, IJvmConstant {
-    private byte[] bytes;
+    private @U1 byte[] bytes;
 
     public ConstantUtf8(IByteCodeReader reader) { read(reader); }
 
+    @U1
     @Override
-    public byte getTag() { return ClassFileConstantTagConst.UTF8_INFO; }
+    public int getTag() { return ClassFileConstantTagConst.UTF8_INFO; }
 
     @Override
     public void read(IByteCodeReader reader) {
         bytes = new byte[reader.readU2()];
         for (int i = 0; i < bytes.length; i++)
-            bytes[i] = reader.readU1();
+            bytes[i] = (byte) reader.readU1();
     }
 
     public String contentToString() { return new String(bytes, StandardCharsets.UTF_8); }

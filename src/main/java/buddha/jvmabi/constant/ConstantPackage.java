@@ -1,6 +1,8 @@
 package buddha.jvmabi.constant;
 
 import buddha.jvmabi.ClassFileConstantTagConst;
+import buddha.jvmabi.annotation.U1;
+import buddha.jvmabi.annotation.U2;
 import buddha.jvmabi.reader.IByteCodeReader;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -14,12 +16,13 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 public final class ConstantPackage implements Serializable, IJvmConstant {
-    private short nameIndex; // 指向常量池中一个CONSTANT_Utf8_Info
+    private @U2 int nameIndex; // 指向常量池中一个CONSTANT_Utf8_Info
 
     public ConstantPackage(IByteCodeReader reader) { read(reader); }
 
+    @U1
     @Override
-    public byte getTag() { return ClassFileConstantTagConst.PACKAGE_INFO; }
+    public int getTag() { return ClassFileConstantTagConst.PACKAGE_INFO; }
 
     @Override
     public void read(IByteCodeReader reader) { nameIndex = reader.readU2(); }

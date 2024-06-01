@@ -1,5 +1,6 @@
 package buddha.jvmabi;
 
+import buddha.jvmabi.annotation.U2;
 import buddha.jvmabi.constant.IJvmConstant;
 
 import java.util.ArrayList;
@@ -17,7 +18,7 @@ public final class ClassFileConstantPool {
      * length代表常量池的大小，它在常量池被创建的时候大小就已经确定了
      * 并在之后的使用中不会发生变化
      */
-    private final int length;
+    private final @U2 int length;
 
     public ClassFileConstantPool(int constantPoolCount) {
         pool = new ArrayList<>(constantPoolCount);

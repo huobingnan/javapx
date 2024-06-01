@@ -1,5 +1,6 @@
 package buddha.jvmabi.constant;
 
+import buddha.jvmabi.annotation.U1;
 import buddha.jvmabi.reader.IByteCodeReader;
 
 /**
@@ -12,7 +13,7 @@ public interface IJvmConstant {
      * @see buddha.jvmabi.ClassFileConstantTagConst
      * @return 常量标签
      */
-    byte getTag();
+    @U1 int getTag();
 
     /**
      * 通过IByteCodeReader读取常量池信息

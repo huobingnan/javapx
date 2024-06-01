@@ -1,6 +1,8 @@
 package buddha.jvmabi.constant;
 
 import buddha.jvmabi.ClassFileConstantTagConst;
+import buddha.jvmabi.annotation.U1;
+import buddha.jvmabi.annotation.U2;
 import buddha.jvmabi.reader.IByteCodeReader;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -15,13 +17,14 @@ import java.io.Serializable;
 @AllArgsConstructor
 public final class ConstantInterfaceMethodRef implements Serializable, IJvmConstant {
 
-    private short classIndex;       // 指向常量池中的一个CONSTANT_Class_Info
-    private short nameAndTypeIndex; // 指向常量池中的一个CONSTANT_NameAndType_Info
+    private @U2 int classIndex;       // 指向常量池中的一个CONSTANT_Class_Info
+    private @U2 int nameAndTypeIndex; // 指向常量池中的一个CONSTANT_NameAndType_Info
 
     public ConstantInterfaceMethodRef(IByteCodeReader reader) { read(reader); }
 
+    @U1
     @Override
-    public byte getTag() { return ClassFileConstantTagConst.INTERFACE_METHOD_REF_INFO; }
+    public int getTag() { return ClassFileConstantTagConst.INTERFACE_METHOD_REF_INFO; }
 
     @Override
     public void read(IByteCodeReader reader) {

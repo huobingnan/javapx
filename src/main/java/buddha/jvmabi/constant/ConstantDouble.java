@@ -22,7 +22,11 @@ public final class ConstantDouble implements Serializable, IJvmConstant {
     public byte getTag() { return ClassFileConstantTagConst.DOUBLE_INFO; }
 
     @Override
-    public void read(IByteCodeReader reader) { value = Double.longBitsToDouble(reader.readU4()); }
+    public void read(IByteCodeReader reader) {
+        value = Double.longBitsToDouble(
+                Integer.toUnsignedLong(reader.readU4())
+        );
+    }
 
     @Override
     public String toString() {

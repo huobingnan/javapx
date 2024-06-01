@@ -16,7 +16,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 public final class ConstantMethodHandle implements Serializable, IJvmConstant {
-    private @U2 int referenceKind;
+    private @U1 int referenceKind;
     private @U2 int referenceIndex;
 
     public ConstantMethodHandle(IByteCodeReader reader) { read(reader); }
@@ -27,7 +27,7 @@ public final class ConstantMethodHandle implements Serializable, IJvmConstant {
 
     @Override
     public void read(IByteCodeReader reader) {
-        referenceKind = reader.readU2();
+        referenceKind = reader.readU1();
         referenceIndex = reader.readU2();
     }
 

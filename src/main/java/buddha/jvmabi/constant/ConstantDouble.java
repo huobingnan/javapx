@@ -25,9 +25,7 @@ public final class ConstantDouble implements Serializable, IJvmConstant {
 
     @Override
     public void read(IByteCodeReader reader) {
-        value = Double.longBitsToDouble(
-                Integer.toUnsignedLong(reader.readU4())
-        );
+        value = Double.longBitsToDouble(reader.readU8());
     }
 
     @Override

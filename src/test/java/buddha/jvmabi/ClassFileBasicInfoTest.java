@@ -27,13 +27,9 @@ public class ClassFileBasicInfoTest extends BaseTest {
         assertEquals(ClassFileConstantTagConst.NAME_AND_TYPE_INFO, pool.get(3).getTag());
         assertEquals(ClassFileConstantTagConst.UTF8_INFO, pool.get(6).getTag());
         assertEquals(ClassFileConstantTagConst.UTF8_INFO, pool.get(24).getTag());
-        final int nameIndex = pool.<ConstantNameAndType>getExact(9).getNameIndex();
-        final int descIndex = pool.<ConstantNameAndType>getExact(9).getDescriptorIndex();
-        assertEquals(11, nameIndex);
-        assertEquals(12, descIndex);
-        for (int i = 1, len = pool.length(); i < len; i++) {
-            System.out.println(i + ": " + pool.get(i));
-        }
+        assertEquals(11, pool.<ConstantNameAndType>getExact(9).getNameIndex());
+        assertEquals(12, pool.<ConstantNameAndType>getExact(9).getDescriptorIndex());
+
     }
 
     @Test

@@ -8,17 +8,18 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 public class ConstantPool1Test extends BaseTest {
 
-    /**
-     * 常量池的大小测试
-     */
+
     @Test
-    public void poolSizeTest() {
-        final ClassFileConstantPool constantPool = classFile.getConstantPool();
-        assertEquals(25, constantPool.length());
+    public void shouldGetCorrectBasicInfo() {
+        assertEquals(0, classFile.getMinorVersion());
+        assertEquals(65, classFile.getMajorVersion());
+        assertEquals(85, classFile.getConstantPool().length());
+        assertEquals(23, classFile.getThisClass());
+        assertEquals(2, classFile.getSuperClass());
     }
 
     @Override
     String getClassFilename() {
-        return "data/BiLock.class";
+        return "data/ConstantPoolTest.class";
     }
 }

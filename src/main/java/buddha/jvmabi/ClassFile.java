@@ -70,8 +70,16 @@ public final class ClassFile {
     }
 
     private static void parseConstantPool(ClassFileConstantPool pool, IByteCodeReader reader) {
-        for (int i = 1, len = pool.length(); i < len; i++) {
-            pool.append(parseConstant(reader));
+        for (int i = 1, len = pool.length(); i < len;) {
+            final IJvmConstant constant = parseConstant(reader);
+            pool.append(constant);
+            final int tag = constant.getTag();
+            if (tag == ClassFileConstantTagConst.LONG_INFO || tag == ClassFileConstantTagConst.DOUBLE_INFO) {
+                pool.append(null);
+                i+=2;
+            } else {
+                i++;
+            }
         }
     }
 

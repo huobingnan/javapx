@@ -17,7 +17,6 @@ public final class ClassFile {
     private int magic;                                 // 魔数
     private short minorVersion;                        // 次版本号
     private short majorVersion;                        // 主版本号
-    // private short constantPoolCount;                // 常量池大小 => 体现在constantpool中
     private ClassFileConstantPool constantPool;     // 常量池
     private short accessFlags;                         // 本类的访问权限
     private short thisClass;                           // 本类在常量池中的索引

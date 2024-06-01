@@ -1,6 +1,7 @@
 package buddha.jvmabi.attribute;
 
 import buddha.jvmabi.AttributeType;
+import buddha.jvmabi.annotation.U4;
 import buddha.jvmabi.reader.IByteCodeReader;
 import buddha.jvmabi.ClassFileConstantPool;
 
@@ -9,7 +10,7 @@ import java.io.Serializable;
 // 本地变量表
 public final class LocalVariableTableAttr implements Serializable, IJvmAttribute {
 
-    private int length;
+    private @U4 int length;
     private LocalVariableInfo[] localVariableTable;
 
     public LocalVariableTableAttr() {}

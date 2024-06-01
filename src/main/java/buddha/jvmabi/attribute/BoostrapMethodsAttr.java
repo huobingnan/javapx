@@ -25,8 +25,8 @@ public class BoostrapMethodsAttr implements IJvmAttribute {
         length = reader.readU4();
         methods = new BootstrapMethod[reader.readU2()];
         for (int i = 0; i < methods.length; i++) {
-            final short methodRef = reader.readU2();
-            final short[] args = new short[reader.readU2()];
+            final int methodRef = reader.readU2();
+            final int[] args = new int[reader.readU2()];
             for (int j = 0; j < args.length; j++) { args[i] = reader.readU2(); }
             methods[i] = new BootstrapMethod(methodRef, args);
         }

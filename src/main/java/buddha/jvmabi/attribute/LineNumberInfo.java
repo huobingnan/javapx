@@ -1,16 +1,15 @@
 package buddha.jvmabi.attribute;
 
+import buddha.jvmabi.annotation.U2;
+import lombok.Getter;
+import lombok.Setter;
+
 import java.io.Serializable;
 
+@Getter
+@Setter
 public final class LineNumberInfo implements Serializable {
-    private short startPc;
-    private short lineNumber;
+    private @U2 int startPc;
+    private @U2 int lineNumber;
 
-    public short getStartPc() { return startPc; }
-
-    public short getLineNumber() { return lineNumber; }
-
-    public void setStartPc(short startPc) { this.startPc = startPc; }
-
-    public void setLineNumber(short lineNumber) { this.lineNumber = lineNumber; }
 }

@@ -1,13 +1,18 @@
 package buddha.jvmabi.attribute.stkmaptbl;
 
+import buddha.jvmabi.annotation.U2;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+@AllArgsConstructor
 public class ItemUninitialized implements IVerificationType {
 
-    private short offset;
-
-    public ItemUninitialized(short offset) { this.offset = offset; }
+    private @U2 int offset;
 
     @Override
     public int tag() { return 8; }
 
-    public short getOffset() { return offset; }
 }

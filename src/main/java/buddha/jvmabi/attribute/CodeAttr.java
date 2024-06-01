@@ -3,6 +3,8 @@ package buddha.jvmabi.attribute;
 import buddha.jvmabi.AttributeType;
 import buddha.jvmabi.ClassFile;
 import buddha.jvmabi.ClassFileConstantPool;
+import buddha.jvmabi.annotation.U1;
+import buddha.jvmabi.annotation.U2;
 import buddha.jvmabi.reader.IByteCodeReader;
 import lombok.*;
 
@@ -17,10 +19,10 @@ import java.io.Serializable;
 @NoArgsConstructor
 public final class CodeAttr implements Serializable, IJvmAttribute {
 
-    private int length;
-    private int maxStack;
-    private int maxLocals;
-    private byte[] code;
+    private @U2 int length;
+    private @U2 int maxStack;
+    private @U2 int maxLocals;
+    private @U1 byte[] code;
     private CodeExceptionInfo[] exceptionTable;
     private IJvmAttribute[] attributes;
 

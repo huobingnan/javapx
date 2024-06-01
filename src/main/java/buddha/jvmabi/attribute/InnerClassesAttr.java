@@ -1,6 +1,7 @@
 package buddha.jvmabi.attribute;
 
 import buddha.jvmabi.AttributeType;
+import buddha.jvmabi.annotation.U4;
 import buddha.jvmabi.reader.IByteCodeReader;
 import buddha.jvmabi.ClassFileConstantPool;
 import lombok.Getter;
@@ -15,7 +16,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 public final class InnerClassesAttr implements Serializable, IJvmAttribute {
 
-    private int length;
+    private @U4 int length;
     private InnerClassInfo[] classesInfo;
 
     public InnerClassesAttr(ClassFileConstantPool pool, IByteCodeReader reader) { read(pool, reader); }

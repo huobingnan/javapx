@@ -1,15 +1,18 @@
 package buddha.jvmabi.attribute.stkmaptbl;
 
-public class AppendFrame implements IStackMapFrame {
-    private int tag;
-    private short offsetDelta;
-    private IVerificationType[] verifications;
+import buddha.jvmabi.annotation.U1;
+import buddha.jvmabi.annotation.U2;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 
-    public AppendFrame(int tag, short offsetDelta, IVerificationType[] verifications) {
-        this.tag = tag;
-        this.offsetDelta = offsetDelta;
-        this.verifications = verifications;
-    }
+@Getter
+@Setter
+@AllArgsConstructor
+public class AppendFrame implements IStackMapFrame {
+    private @U1 int tag;
+    private @U2 int offsetDelta;
+    private IVerificationType[] verifications;
 
     @Override
     public int tag() { return tag; }

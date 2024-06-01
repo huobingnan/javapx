@@ -1,13 +1,17 @@
 package buddha.jvmabi.attribute.stkmaptbl;
 
-public class SameFrameExtended implements IStackMapFrame {
-    private int tag;
-    private short offsetDelta;
+import buddha.jvmabi.annotation.U1;
+import buddha.jvmabi.annotation.U2;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 
-    public SameFrameExtended(int tag, short offsetDelta) {
-        this.tag = tag;
-        this.offsetDelta = offsetDelta;
-    }
+@Getter
+@Setter
+@AllArgsConstructor
+public class SameFrameExtended implements IStackMapFrame {
+    private @U1 int tag;
+    private @U2 int offsetDelta;
 
     @Override
     public int tag() { return tag; }

@@ -2,12 +2,13 @@ package buddha.jvmabi.attribute;
 
 import buddha.jvmabi.AttributeType;
 import buddha.jvmabi.ClassFileConstantPool;
+import buddha.jvmabi.annotation.U4;
 import buddha.jvmabi.reader.IByteCodeReader;
 import buddha.jvmabi.reader.ReadByteCodeException;
 import buddha.jvmabi.attribute.stkmaptbl.*;
 
 public class StackMapTableAttr implements IJvmAttribute {
-    private int length;
+    private @U4 int length;
     private IStackMapFrame[] entries;
 
     public StackMapTableAttr() {}
@@ -23,7 +24,7 @@ public class StackMapTableAttr implements IJvmAttribute {
         entries = new IStackMapFrame[reader.readU2()];
         for (int i = 0; i < entries.length; i++) {
             // TODO： 这里的取值待商榷
-            final int tag = Byte.toUnsignedInt(reader.readU1());
+            final int tag = reader.readU1();
             if (tag <=63) {
                 entries[i] = new SameFrame(tag);
             } else if (tag <= 127) {
@@ -36,7 +37,7 @@ public class StackMapTableAttr implements IJvmAttribute {
                 entries[i] = new SameFrameExtended(tag, reader.readU2());
             } else if (tag >= 252 && tag <= 254) {
                 // append frame
-                final short offset = reader.readU2();
+                final int offset = reader.readU2();
                 final IVerificationType[] vs = new IVerificationType[tag - 251];
                 for (int k = 0; k < tag - 251; k++) {
                     vs[i] = readVerification(reader);
@@ -44,7 +45,7 @@ public class StackMapTableAttr implements IJvmAttribute {
                 entries[i] = new AppendFrame(tag, offset, vs);
             } else {
                 // full frame
-                final short offset = reader.readU2();
+                final int offset = reader.readU2();
                 final IVerificationType[] vl = new IVerificationType[reader.readU2()];
                 for (int k = 0; k < vl.length; k++) {
                     vl[i] = readVerification(reader);
@@ -62,7 +63,7 @@ public class StackMapTableAttr implements IJvmAttribute {
     public int getAttrLength() { return length; }
 
     private IVerificationType readVerification(IByteCodeReader reader) {
-        final byte tag = reader.readU1();
+        final int tag = reader.readU1();
         switch (tag) {
             case 0:
                 return new ItemTop();

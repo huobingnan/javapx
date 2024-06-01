@@ -1,31 +1,17 @@
 package buddha.jvmabi.attribute;
 
+import buddha.jvmabi.annotation.U2;
+import lombok.Getter;
+import lombok.Setter;
+
 import java.io.Serializable;
 
+@Getter
+@Setter
 public final class LocalVariableInfo implements Serializable {
-    private short startPc;
-    private short length;
-    private short nameIndex;
-    private short descriptorIndex;
-    private short index;
-
-    public short getStartPc() { return startPc; }
-
-    public void setStartPc(short startPc) { this.startPc = startPc; }
-
-    public short getLength() { return length; }
-
-    public void setLength(short length) { this.length = length; }
-
-    public short getNameIndex() { return nameIndex; }
-
-    public void setNameIndex(short nameIndex) { this.nameIndex = nameIndex; }
-
-    public short getDescriptorIndex() { return descriptorIndex; }
-
-    public void setDescriptorIndex(short descriptorIndex) { this.descriptorIndex = descriptorIndex; }
-
-    public short getIndex() { return index; }
-
-    public void setIndex(short index) { this.index = index; }
+    private @U2 int startPc;
+    private @U2 int length;
+    private @U2 int nameIndex;
+    private @U2 int descriptorIndex;
+    private @U2 int index;
 }

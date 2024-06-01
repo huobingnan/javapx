@@ -1,6 +1,7 @@
 package buddha.jvmabi.attribute;
 
 import buddha.jvmabi.AttributeType;
+import buddha.jvmabi.annotation.U4;
 import buddha.jvmabi.reader.IByteCodeReader;
 import buddha.jvmabi.ClassFileConstantPool;
 
@@ -8,10 +9,9 @@ import java.io.Serializable;
 
 public final class LineNumberTableAttr implements Serializable, IJvmAttribute {
 
-    private int length;
+    private @U4 int length;
     private LineNumberInfo[] lineNumberTable;
 
-    public LineNumberTableAttr() {}
 
     public LineNumberTableAttr(ClassFileConstantPool pool, IByteCodeReader reader) { read(pool, reader); }
 

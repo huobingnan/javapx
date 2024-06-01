@@ -1,17 +1,19 @@
 package buddha.jvmabi.attribute.stkmaptbl;
 
+import buddha.jvmabi.annotation.U1;
+import buddha.jvmabi.annotation.U2;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+@AllArgsConstructor
 public class FullFrame implements IStackMapFrame {
-    private int tag;
-    private short offset;
+    private @U1 int tag;
+    private @U2 int offset;
     private IVerificationType[] vl;
     private IVerificationType[] vs;
-
-    public FullFrame(int tag, short offset, IVerificationType[] vl, IVerificationType[] vs) {
-        this.tag = tag;
-        this.offset = offset;
-        this.vl = vl;
-        this.vs = vs;
-    }
 
     @Override
     public int tag() {

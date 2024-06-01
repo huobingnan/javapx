@@ -1,22 +1,21 @@
 package buddha.jvmabi.attribute;
 
 import buddha.jvmabi.AttributeType;
+import buddha.jvmabi.annotation.U2;
+import buddha.jvmabi.annotation.U4;
 import buddha.jvmabi.reader.IByteCodeReader;
 import buddha.jvmabi.ClassFileConstantPool;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.io.Serializable;
 
+@Getter
+@Setter
 public final class SourceFileAttr implements Serializable, IJvmAttribute {
 
-    private int length;
-    private short index;
-
-    public SourceFileAttr() {}
-
-    public SourceFileAttr(int length, short index) {
-        this.length = length;
-        this.index = index;
-    }
+    private @U4 int length;
+    private @U2 int index;
 
     public SourceFileAttr(ClassFileConstantPool pool, IByteCodeReader reader) { read(pool, reader); }
 
@@ -32,5 +31,4 @@ public final class SourceFileAttr implements Serializable, IJvmAttribute {
     @Override
     public int getAttrLength() { return length;}
 
-    public short getIndex() { return index; }
 }

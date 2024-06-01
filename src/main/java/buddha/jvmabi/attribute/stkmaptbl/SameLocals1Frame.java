@@ -1,7 +1,13 @@
 package buddha.jvmabi.attribute.stkmaptbl;
 
+import buddha.jvmabi.annotation.U1;
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class SameLocals1Frame implements IStackMapFrame {
-    private int tag;
+    private @U1 int tag;
 
     private IVerificationType verification;
 
@@ -10,6 +16,7 @@ public class SameLocals1Frame implements IStackMapFrame {
         this.verification = verification;
     }
 
+    @U1
     @Override
     public int tag() { return tag; }
 

@@ -9,7 +9,14 @@ import java.util.List;
  * 字节码文件的常量池区域
  */
 public final class ClassFileConstantPool {
+    /**
+     * 常量池中常量的列表
+     */
     private final List<IJvmConstant> pool;
+    /**
+     * length代表常量池的大小，它在常量池被创建的时候大小就已经确定了
+     * 并在之后的使用中不会发生变化
+     */
     private final int length;
 
     public ClassFileConstantPool(int constantPoolCount) {
@@ -18,6 +25,10 @@ public final class ClassFileConstantPool {
         pool.add(null);
     }
 
+    /**
+     * 向常量池中添加一个常量条目
+     * @param constant 常量条目
+     */
     public void append(IJvmConstant constant) { pool.add(constant); }
 
     public int length() { return length; }

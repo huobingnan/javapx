@@ -10,10 +10,12 @@ import buddha.jvmabi.reader.ReadByteCodeException;
 import buddha.jvmabi.attribute.*;
 import buddha.jvmabi.constant.*;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.io.InputStream;
 
 @Getter
+@Setter
 public final class ClassFile {
 
     private @U4 int magic;                                 // 魔数

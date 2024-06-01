@@ -2,6 +2,7 @@ package buddha.jvmabi.attribute;
 
 import buddha.jvmabi.AttributeType;
 import buddha.jvmabi.ClassFileConstantPool;
+import buddha.jvmabi.annotation.U4;
 import buddha.jvmabi.reader.IByteCodeReader;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,12 +11,12 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class BoostrapMethodsAttr implements IJvmAttribute {
+public class BootstrapMethodsAttr implements IJvmAttribute {
 
-    private int length;
+    private @U4 int length;
     private BootstrapMethod[] methods;
 
-    public BoostrapMethodsAttr(ClassFileConstantPool pool, IByteCodeReader reader) { read(pool, reader); }
+    public BootstrapMethodsAttr(ClassFileConstantPool pool, IByteCodeReader reader) { read(pool, reader); }
 
     @Override
     public AttributeType type() { return AttributeType.BOOTSTRAP_METHODS; }

@@ -157,7 +157,7 @@ public final class ClassFile {
             case "InnerClasses":
                 return new InnerClassesAttr(pool, reader);
             case "BootstrapMethods":
-                return new BoostrapMethodsAttr(pool, reader);
+                return new BootstrapMethodsAttr(pool, reader);
             case "MethodParameters":
                 return new MethodParametersAttr(pool, reader);
             case "StackMapTable":

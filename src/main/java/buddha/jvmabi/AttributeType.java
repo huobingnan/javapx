@@ -18,7 +18,7 @@ public enum AttributeType {
     DEPRECATED("Deprecated", DeprecatedAttr.class),
     SYNTHETIC("Synthetic", SyntheticAttr.class),
     INNER_CLASSES("InnerClasses", InnerClassesAttr.class),
-    BOOTSTRAP_METHODS("BootstrapMethods", BoostrapMethodsAttr.class),
+    BOOTSTRAP_METHODS("BootstrapMethods", BootstrapMethodsAttr.class),
     METHOD_PARAMETERS("MethodParameters", MethodParametersAttr.class),
     STACK_MAP_TABLE("StackMapTable", StackMapTableAttr.class),
     ;

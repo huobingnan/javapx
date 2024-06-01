@@ -22,7 +22,7 @@ import static org.junit.jupiter.api.Assertions.*;
  *  12.CONSTANT_Class_info
  * 未验证的常量
  *  1. CONSTANT_String_info
- *  2. CONSTANT_InterfaceMethodref_info
+ *  2. CONSTANT_InterfaceMethodref_infoi
  */
 public class ConstantPool1Test extends BaseTest {
 

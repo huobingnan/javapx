@@ -1,0 +1,31 @@
+plugins {
+    id 'java'
+}
+
+group = 'buddha'
+version = '0.0.1-SNAPSHOT'
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+compileJava {
+    options.encoding = "UTF-8"
+}
+
+compileTestJava {
+    options.encoding = "UTF-8"
+}
+
+dependencies {
+    testImplementation platform('org.junit:junit-bom:5.10.0')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    // lanterna --> TUI Solution
+    implementation 'com.googlecode.lanterna:lanterna:2.1.1'
+    implementation project(':abi')
+}
+
+test {
+    useJUnitPlatform()
+}

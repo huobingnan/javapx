@@ -1,2 +1,4 @@
 rootProject.name = 'jvmabi'
+include 'abi'
+include 'tui'
 

@@ -1,4 +1,4 @@
-package buddha.jvmabi;
+package buddha.javapx;
 
 import buddha.javapx.abi.ClassFile;
 import buddha.javapx.abi.reader.DefaultByteCodeReader;
@@ -14,6 +14,7 @@ public abstract class BaseTest {
 
     public BaseTest() {
         try {
+            System.out.println(System.getProperty("user.dir"));
             reader = new DefaultByteCodeReader(new FileInputStream(getClassFilename()));
             classFile = ClassFile.parse(reader);
         } catch (IOException ex) {

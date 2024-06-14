@@ -1,7 +1,5 @@
 package buddha.javapx.abi;
 
-import buddha.abi.attribute.*;
-import buddha.abi.constant.*;
 import buddha.javapx.abi.field.FieldItem;
 import buddha.javapx.abi.method.MethodItem;
 import buddha.javapx.abi.reader.DefaultByteCodeReader;
@@ -11,8 +9,6 @@ import buddha.javapx.abi.annotation.U2;
 import buddha.javapx.abi.annotation.U4;
 import buddha.javapx.abi.attribute.*;
 import buddha.javapx.abi.constant.*;
-import buddha.jvmabi.attribute.*;
-import buddha.jvmabi.constant.*;
 import lombok.Getter;
 import lombok.Setter;
 

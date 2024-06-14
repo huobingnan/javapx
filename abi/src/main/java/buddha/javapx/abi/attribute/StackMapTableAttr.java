@@ -1,13 +1,11 @@
 package buddha.javapx.abi.attribute;
 
-import buddha.abi.attribute.stkmaptbl.*;
 import buddha.javapx.abi.AttributeType;
 import buddha.javapx.abi.ClassFileConstantPool;
 import buddha.javapx.abi.annotation.U4;
 import buddha.javapx.abi.reader.IByteCodeReader;
 import buddha.javapx.abi.reader.ReadByteCodeException;
 import buddha.javapx.abi.attribute.stkmaptbl.*;
-import buddha.jvmabi.attribute.stkmaptbl.*;
 
 public class StackMapTableAttr implements IJvmAttribute {
     private @U4 int length;

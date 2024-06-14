@@ -1,4 +1,4 @@
-package buddha.jvmabi;
+package buddha.javapx;
 
 import buddha.javapx.abi.ClassFileConstantPool;
 import buddha.javapx.abi.ClassFileConstantTagConst;

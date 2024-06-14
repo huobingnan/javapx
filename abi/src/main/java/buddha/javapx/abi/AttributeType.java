@@ -1,9 +1,7 @@
 package buddha.javapx.abi;
 
 
-import buddha.abi.attribute.*;
 import buddha.javapx.abi.attribute.*;
-import buddha.jvmabi.attribute.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 

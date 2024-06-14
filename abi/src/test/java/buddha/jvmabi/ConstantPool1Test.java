@@ -1,6 +1,7 @@
 package buddha.jvmabi;
-import buddha.jvmabi.attribute.BootstrapMethodsAttr;
-import buddha.jvmabi.constant.*;
+import buddha.javapx.abi.ClassFileConstantPool;
+import buddha.javapx.abi.RefKindConst;
+import buddha.javapx.abi.constant.*;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

@@ -1,7 +1,7 @@
 package buddha.jvmabi;
 
-import buddha.jvmabi.reader.DefaultByteCodeReader;
-import buddha.jvmabi.reader.IByteCodeReader;
+import buddha.javapx.abi.reader.DefaultByteCodeReader;
+import buddha.javapx.abi.reader.IByteCodeReader;
 import org.junit.jupiter.api.Test;
 
 import java.io.FileInputStream;

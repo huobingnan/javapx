@@ -23,6 +23,7 @@ dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter'
     // lanterna --> TUI Solution
     implementation 'com.googlecode.lanterna:lanterna:2.1.1'
+    implementation 'info.picocli:picocli:4.7.6'
     implementation project(':abi')
 }
 

@@ -1,6 +1,8 @@
 package buddha.jvmabi;
 
-import buddha.jvmabi.attribute.CodeAttr;
+import buddha.javapx.abi.AttributeType;
+import buddha.javapx.abi.ClassFile;
+import buddha.javapx.abi.attribute.CodeAttr;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;

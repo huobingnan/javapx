@@ -1,7 +1,8 @@
 package buddha.jvmabi;
 
-import buddha.jvmabi.reader.DefaultByteCodeReader;
-import buddha.jvmabi.reader.IByteCodeReader;
+import buddha.javapx.abi.ClassFile;
+import buddha.javapx.abi.reader.DefaultByteCodeReader;
+import buddha.javapx.abi.reader.IByteCodeReader;
 
 import java.io.FileInputStream;
 import java.io.IOException;

@@ -1,6 +1,8 @@
 package buddha.jvmabi;
 
-import buddha.jvmabi.constant.ConstantNameAndType;
+import buddha.javapx.abi.ClassFileConstantPool;
+import buddha.javapx.abi.ClassFileConstantTagConst;
+import buddha.javapx.abi.constant.ConstantNameAndType;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 

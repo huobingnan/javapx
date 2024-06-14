@@ -1,22 +1,11 @@
+import java.nio.file.Paths
+
 plugins {
     id 'java'
 }
 
 group = 'buddha'
 version = '0.0.1-SNAPSHOT'
-
-repositories {
-    mavenLocal()
-    mavenCentral()
-}
-
-compileJava {
-    options.encoding = "UTF-8"
-}
-
-compileTestJava {
-    options.encoding = "UTF-8"
-}
 
 dependencies {
     testImplementation platform('org.junit:junit-bom:5.10.0')
@@ -25,9 +14,33 @@ dependencies {
     compileOnly 'org.projectlombok:lombok:1.18.32'
     annotationProcessor('org.projectlombok:lombok:1.18.32')
     // lanterna --> TUI Solution
-    implementation 'com.googlecode.lanterna:lanterna:2.1.1'
+    // https://mvnrepository.com/artifact/com.googlecode.lanterna/lanterna
+    implementation 'com.googlecode.lanterna:lanterna:3.2.0-alpha1'
+    // https://mvnrepository.com/artifact/net.java.dev.jna/jna
+    implementation 'net.java.dev.jna:jna:5.14.0'
+// https://mvnrepository.com/artifact/net.java.dev.jna/jna-platform
+    implementation 'net.java.dev.jna:jna-platform:5.14.0'
     implementation 'info.picocli:picocli:4.7.6'
     implementation project(':abi')
+}
+
+// 生成控制台运行脚本
+tasks.register("genRunBat") {
+    doLast {
+        def file = new File("run.bat")
+        file.exists() && file.delete() && file.createNewFile()
+        def classpath = [
+                "${project.layout.buildDirectory.get().asFile.getAbsolutePath()}\\classes\\java\\main".toString()
+        ]
+        sourceSets.main.runtimeClasspath.collect {
+            if (it.getName().endsWith(".jar")) {
+                classpath.add(it.getAbsolutePath())
+            }
+        }
+        file << "java -cp "
+        file << classpath.join(";") << " "
+        file << "buddha.javapx.tui.MainUI"
+    }
 }
 
 test {

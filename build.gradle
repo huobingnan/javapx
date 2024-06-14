@@ -13,6 +13,7 @@ repositories {
 subprojects {
     repositories {
         mavenLocal()
+        maven { url 'https://maven.aliyun.com/repository/public/' }
         mavenCentral()
     }
     compileJava {

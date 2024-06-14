@@ -1,4 +1,4 @@
-rootProject.name = 'jvmabi'
+rootProject.name = 'javapx'
 include 'abi'
 include 'tui'
 
